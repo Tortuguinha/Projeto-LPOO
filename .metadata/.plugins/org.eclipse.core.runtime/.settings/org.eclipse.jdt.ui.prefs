@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 content_assist_completion_replacement_background=200,200,0
 content_assist_completion_replacement_foreground=200,0,0
 content_assist_number_of_computers=16
@@ -5,6 +6,9 @@ content_assist_parameters_background=52,57,61
 content_assist_parameters_foreground=238,238,238
 content_assist_proposals_background=52,57,61
 content_assist_proposals_foreground=238,238,238
+=======
+content_assist_number_of_computers=15
+>>>>>>> 886cc1c3f5ba114963fbe00caf1ceb7789edf8ce
 eclipse.preferences.version=1
 java_bracket=249,250,244
 java_comment_task_tag=154,140,124
