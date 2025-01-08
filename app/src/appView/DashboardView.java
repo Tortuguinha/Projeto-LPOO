@@ -1,4 +1,4 @@
-package app.view;
+package appView;
 
 import java.awt.EventQueue;
 
