@@ -1,8 +1,8 @@
-package model;
+package app.model;
 
 import java.time.LocalDate;
 
-public class Protocol {
+public class ProtocolModel {
     private int id;
     private String numero;
     private LocalDate data;
@@ -10,8 +10,8 @@ public class Protocol {
     private String status;
 
     // Construtores
-    public Protocol() {}
-    public Protocol(String numero, LocalDate data, String descricao, String status) {
+    public ProtocolModel() {}
+    public ProtocolModel(String numero, LocalDate data, String descricao, String status) {
         this.numero = numero;
         this.data = data;
         this.descricao = descricao;

@@ -1,6 +1,6 @@
-package appView;
+package app.view;
 
-import model.serviceOrder;
+import app.model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class serviceScreen extends JFrame {
+public class ServiceScreen extends JFrame {
     private JTextField txtNumero;
     private JTextField txtCliente;
     private JTextArea txtDescricao;
@@ -16,9 +16,9 @@ public class serviceScreen extends JFrame {
     private JTextField txtValorTotal;
     private JButton btnSalvar, btnLimpar;
 
-    private List<serviceScreen> ordensServico = new ArrayList<>();
+    private List<ServiceScreen> ordensServico = new ArrayList<>();
 
-    public serviceScreen() {
+    public ServiceScreen() {
         setTitle("Cadastro de Ordem de Serviço");
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -92,7 +92,7 @@ public class serviceScreen extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            serviceScreen tela = new serviceScreen();
+            ServiceScreen tela = new ServiceScreen();
             tela.setVisible(true);
         });
     }

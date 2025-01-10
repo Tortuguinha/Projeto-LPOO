@@ -1,8 +1,8 @@
-package model;
+package app.model;
 
 import java.time.LocalDate;
 
-public class serviceOrder {
+public class ServiceModel {
     private int id;
     private String numero;
     private LocalDate data;
@@ -12,12 +12,12 @@ public class serviceOrder {
     private double valorTotal;
 
     // Construtores
-    public serviceOrder() {}
-    public serviceOrder(String numero, LocalDate data, String cliente, String descricao, String status, double valorTotal) {
+    public ServiceModel() {}
+    public ServiceModel(String numero, LocalDate data, String cliente, String descricao, String status, double valorTotal) {
         this.numero = numero;
         this.data = data;
         this.cliente = cliente;
-        this.descricao = descricao;
+        this.descricao = descricao;	
         this.status = status;
         this.valorTotal = valorTotal;
     }

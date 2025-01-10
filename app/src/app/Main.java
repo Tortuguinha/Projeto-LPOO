@@ -2,7 +2,7 @@ package app;
 
 import java.awt.EventQueue;
 
-import appView.LoginView;
+import app.view.LoginView;
 
 public class Main {
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package notification.view;
+package app.view.components;
 
 import java.util.Date;
 
