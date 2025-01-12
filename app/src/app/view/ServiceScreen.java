@@ -1,7 +1,5 @@
 package app.view;
 
-import app.model.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
@@ -9,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceScreen extends JFrame {
+    // Campos para interface gráfica
     private JTextField txtNumero;
     private JTextField txtCliente;
     private JTextArea txtDescricao;
@@ -16,8 +15,28 @@ public class ServiceScreen extends JFrame {
     private JTextField txtValorTotal;
     private JButton btnSalvar, btnLimpar;
 
+    // Lista para armazenar as ordens de serviço
     private List<ServiceScreen> ordensServico = new ArrayList<>();
 
+    // Campos para representar dados da ordem de serviço
+    private String numero;
+    private LocalDate data;
+    private String cliente;
+    private String descricao;
+    private String status;
+    private double valorTotal;
+
+    // Construtor para uso como objeto de dados
+    public ServiceScreen(String numero, LocalDate data, String cliente, String descricao, String status, double valorTotal) {
+        this.numero = numero;
+        this.data = data;
+        this.cliente = cliente;
+        this.descricao = descricao;
+        this.status = status;
+        this.valorTotal = valorTotal;
+    }
+
+    // Construtor para a tela gráfica
     public ServiceScreen() {
         setTitle("Cadastro de Ordem de Serviço");
         setSize(500, 400);
@@ -25,6 +44,7 @@ public class ServiceScreen extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
+        // Painel do formulário
         JPanel panelForm = new JPanel(new GridLayout(6, 2, 10, 10));
         txtNumero = new JTextField();
         txtCliente = new JTextField();
@@ -43,6 +63,7 @@ public class ServiceScreen extends JFrame {
         panelForm.add(new JLabel("Valor Total:"));
         panelForm.add(txtValorTotal);
 
+        // Painel de botões
         JPanel panelButtons = new JPanel(new FlowLayout());
         btnSalvar = new JButton("Salvar");
         btnLimpar = new JButton("Limpar");
@@ -65,16 +86,10 @@ public class ServiceScreen extends JFrame {
             String status = (String) cbStatus.getSelectedItem();
             double valorTotal = Double.parseDouble(txtValorTotal.getText());
 
-            OrdemServico os = new OrdemServico(
-                    numero,
-                    LocalDate.now(),
-                    cliente,
-                    descricao,
-                    status,
-                    valorTotal
-            );
-
+            // Criar uma nova ordem de serviço e adicioná-la à lista
+            ServiceScreen os = new ServiceScreen(numero, LocalDate.now(), cliente, descricao, status, valorTotal);
             ordensServico.add(os);
+
             JOptionPane.showMessageDialog(this, "Ordem de Serviço salva com sucesso!");
             limparCampos();
         } catch (Exception e) {
@@ -88,6 +103,11 @@ public class ServiceScreen extends JFrame {
         txtDescricao.setText("");
         cbStatus.setSelectedIndex(0);
         txtValorTotal.setText("");
+    }
+
+    @Override
+    public String toString() {
+        return "OS Número: " + numero + ", Cliente: " + cliente + ", Status: " + status + ", Valor: " + valorTotal;
     }
 
     public static void main(String[] args) {
