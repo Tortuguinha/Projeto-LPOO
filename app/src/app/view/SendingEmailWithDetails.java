@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.Font;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -14,18 +15,21 @@ public class SendingEmailWithDetails extends JFrame {
 
 	
 	private static final long serialVersionUID = 1L;
+	private static final JTextField ToSend = null;
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField campotextde;
+	private JTextField campotextpara;
+	private static JTextField campotext;
+	private JTextField campotextassunto;
+	private JTextField ToSend1;
+	protected Object email;
 
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SendingEmailWithDetails window = new SendingEmailWithDetails();
+					SendingEmailWithDetails window = new SendingEmailWithDetails(campotext);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +39,7 @@ public class SendingEmailWithDetails extends JFrame {
 	}
 
 	
-	public SendingEmailWithDetails() {
+	public SendingEmailWithDetails(JTextField ToSend) {
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 15));
 		setTitle("Sending email with details");
 		getContentPane().setLayout(null);
@@ -50,55 +54,89 @@ public class SendingEmailWithDetails extends JFrame {
 		De.setBounds(20, 96, 46, 14);
 		getContentPane().add(De);
 		
-		textField = new JTextField();
-		textField.setBounds(66, 94, 437, 20);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		campotextde = new JTextField();
+		campotextde.setBounds(66, 94, 437, 20);
+		getContentPane().add(campotextde);
+		campotextde.setColumns(10);
 		
 		JLabel to = new JLabel("Para : ");
 		to.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		to.setBounds(20, 139, 46, 14);
 		getContentPane().add(to);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(66, 137, 437, 20);
-		getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		campotextpara = new JTextField();
+		campotextpara.setBounds(66, 137, 437, 20);
+		getContentPane().add(campotextpara);
+		campotextpara.setColumns(10);
 		
 		JLabel subject = new JLabel("Assunto : ");
 		subject.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		subject.setBounds(10, 202, 56, 14);
 		getContentPane().add(subject);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(65, 200, 438, 20);
-		getContentPane().add(textField_2);
-		textField_2.setColumns(10);
+		campotext = new JTextField();
+		campotext.setBounds(65, 200, 438, 20);
+		getContentPane().add(campotext);
+		campotext.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(48, 256, 455, 159);
-		getContentPane().add(textField_3);
-		textField_3.setColumns(10);
+		campotextassunto = new JTextField();
+		campotextassunto.setBounds(48, 256, 455, 159);
+		getContentPane().add(campotextassunto);
+		campotextassunto.setColumns(10);
 		
 		JButton ToRespond = new JButton("Responder");
 		ToRespond.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			}
+			
+			String remetenteOriginal = ((Object) email).getFrom(); 
+			String assuntoOriginal = ((Object) email).getSubject(); 
+
+			        // Preencher os campos do formulário
+			JLabel textFieldPara;
+			textFieldPara.setText(remetenteOriginal); 
+			JLabel textFieldAssunto;
+			textFieldAssunto.setText("Re: " + assuntoOriginal); 
+			JLabel textFieldMensagem;
+			textFieldMensagem.setText("Resposta: \n"); 
+
+			        // Exibir mensagem informativa
+			        JOptionPane.showMessageDialog(null, "Campos preenchidos para resposta.", "Informação", JOptionPane.INFORMATION_MESSAGE);
+			    }
+			
+		
 		});
-		ToRespond.setBounds(90, 451, 109, 34);
+		ToRespond.setBounds(91, 426, 109, 34);
 		getContentPane().add(ToRespond);
 		
-		JButton btnNewButton_1 = new JButton("Enviar");
-		btnNewButton_1.setBounds(90, 451, 109, 34);
-		getContentPane().add(btnNewButton_1);
 		
-		JButton ToSend = new JButton("Enviar");
-		ToSend.addActionListener(new ActionListener() {
+		
+		JButton btnEnviar = new JButton("Enviar");
+		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JLabel textFieldDe;
+				String de = textFieldDe.getText();
+		        JLabel textFieldPara;
+				String para = textFieldPara.getText();
+		        JLabel textFieldAssunto;
+				String assunto = textFieldAssunto.getText();
+		        JLabel textFieldMensagem;
+				String mensagem = textFieldMensagem.getText();
+
+		        if (de.isEmpty() || para.isEmpty() || assunto.isEmpty() || mensagem.isEmpty()) {
+		            JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+		            return;
+		        }
+			}
+		
+		
+		});
+		btnEnviar.setBounds(282, 426, 102, 34);
+		getContentPane().add(btnEnviar);	
+		
 			}
 		});
-		ToSend.setBounds(209, 451, 118, 34);
-		getContentPane().add(ToSend);
+		ToSend1.setBounds(209, 451, 118, 34);
+		getContentPane().add(ToSend1);
 		initialize();
 	}
 

@@ -9,6 +9,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
+
 
 public class UserRegistration extends LoginView {
 
@@ -21,7 +23,7 @@ public class UserRegistration extends LoginView {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-
+	
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -36,6 +38,8 @@ public class UserRegistration extends LoginView {
 		});
 	}
 
+	
+	
 	
 	public UserRegistration() {
 		setTitle("UserRegistre");
@@ -120,15 +124,62 @@ public class UserRegistration extends LoginView {
 		getContentPane().add(textField_5);
 		textField_5.setColumns(10);
 		
+//		
+//		private boolean temCamposVazios() { 
+//	        return textNome.getText().isEmpty() || 
+//	               txtCpf.getText().isEmpty() || 
+//	               txtEmail.getText().isEmpty() || 
+//	               txtTelefone.getText().isEmpty() || 
+//	               txtEndereco.getText().isEmpty() || 
+//	               txtCidade.getText().isEmpty() || 
+//	               txtRua.getText().isEmpty();
+//	    }
 		JButton BottaoContinue = new JButton("Cadrastrar");
 		BottaoContinue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		BottaoContinue.setBounds(418, 391, 109, 29);
+			
+				  try {
+	                    // Validações
+	                    if (temCamposVazios()) {
+	                        throw new Exception("Por favor, preencha todos os campos obrigatórios.");
+	                    }
+
+	                    if (!validarEmail(txtEmail.getText())) {
+	                        throw new Exception("Email inválido. Por favor, insira um email válido.");
+	                    }
+
+	                    if (!validarCPF(TextCPF.getText())) {
+	                        throw new Exception("CPF inválido. Por favor, insira um CPF válido.");
+	                    }
+	                    if (!validarNome(txtNome.getText())) {
+	                        throw new Exception("Nome inválido. O nome deve conter pelo menos 3 caracteres.");
+	                    }
+	                    }
+				 
+						 if (!validarEndereco(txtEndereco.getText())) {
+                			throw new Exception("endereco inválido. O endereco deve conter pelo menos 20 caracteres.");
+            			}
+         				
+						 if (!validarCidade(txtCidade.getText())) {
+    						throw new Exception("endereco inválido. O endereco deve conter pelo menos 20 caracteres.");
+   						}
+						
+							if (!validarRua(txtRua.getText())) {
+							throw new Exception("rua inválido. A Rua deve conter pelo menos 15 caracteres.");
+						}
+								
+	                    JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+	                } catch (Exception ex) {
+	                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+	                    ex.printStackTrace(); 
+	                
+	            
+		
+	    BottaoContinue.setBounds(418, 391, 109, 29);
 		getContentPane().add(BottaoContinue);
 		initialize();
-	}
+		
 
 	
 	private void initialize() {
