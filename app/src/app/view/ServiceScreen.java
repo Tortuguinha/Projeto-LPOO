@@ -7,17 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceScreen extends JFrame {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    
-	private static final long serialVersionUID = 1L;
-	private JTextField txtNumero;
-=======
-=======
->>>>>>> ea8ee45fedcb6251f716c06cf27a2e97c76b356d
+
+    private static final long serialVersionUID = 1L;
+    private JTextField txtNumero;
+
     // Campos para interface gráfica
     private JTextField txtNumero;
->>>>>>> ea8ee45fedcb6251f716c06cf27a2e97c76b356d
+
     private JTextField txtCliente;
     private JTextArea txtDescricao;
     private JComboBox<String> cbStatus;
@@ -36,7 +32,8 @@ public class ServiceScreen extends JFrame {
     private double valorTotal;
 
     // Construtor para uso como objeto de dados
-    public ServiceScreen(String numero, LocalDate data, String cliente, String descricao, String status, double valorTotal) {
+    public ServiceScreen(String numero, LocalDate data, String cliente, String descricao, String status,
+            double valorTotal) {
         this.numero = numero;
         this.data = data;
         this.cliente = cliente;
@@ -58,7 +55,7 @@ public class ServiceScreen extends JFrame {
         txtNumero = new JTextField();
         txtCliente = new JTextField();
         txtDescricao = new JTextArea(3, 20);
-        cbStatus = new JComboBox<>(new String[]{"Aberto", "Fechado", "Pendente"});
+        cbStatus = new JComboBox<>(new String[] { "Aberto", "Fechado", "Pendente" });
         txtValorTotal = new JTextField();
 
         panelForm.add(new JLabel("Número da OS:"));
@@ -102,7 +99,8 @@ public class ServiceScreen extends JFrame {
             JOptionPane.showMessageDialog(this, "Ordem de Serviço salva com sucesso!");
             limparCampos();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao salvar OS: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro ao salvar OS: " + e.getMessage(), "Erro",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
