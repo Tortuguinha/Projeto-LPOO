@@ -61,14 +61,14 @@ public class LoginView extends JFrame {
 		fieldPwd.setColumns(10);
 
 	
-		 if (titleLogin.getText().isEmpty() || fieldPwd.getText().isEmpty()) { 
-                JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos obrigatórios.", "Erro", JOptionPane.ERROR_MESSAGE);
-             } else {
-            	 if (!Pattern.compile("\\b[\\w.%-]+@(?:[\\w-]+\.)+[A-Za-z]{2,4}\\b").matcher(email).matches()) {
-            		    JOptionPane.showMessageDialog(null, "Formato de email inválido. Por favor, insira um email válido (exemplo: nome@exemplo.com).", "Erro", JOptionPane.ERROR_MESSAGE);
-            		    return;
-            		}
-             }
+//		 if (titleLogin.getText().isEmpty() || fieldPwd.getText().isEmpty()) { 
+//                JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos obrigatórios.", "Erro", JOptionPane.ERROR_MESSAGE);
+//             } else {
+//            	 if (!Pattern.compile("\\b[\\w.%-]+@(?:[\\w-]+\.)+[A-Za-z]{2,4}\\b").matcher(email).matches()) {
+//            		    JOptionPane.showMessageDialog(null, "Formato de email inválido. Por favor, insira um email válido (exemplo: nome@exemplo.com).", "Erro", JOptionPane.ERROR_MESSAGE);
+//            		    return;
+//            		}
+//             }
 		
 		
 		
@@ -90,7 +90,7 @@ public class LoginView extends JFrame {
 		btnRecovery.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String email = fieldEmail.getText();
-		        String senha = new String(((Object) fieldPwd).getfieldpwd());
+//		        String senha = new String(((Object) fieldPwd).getfieldpwd());
 			}
 		
 		

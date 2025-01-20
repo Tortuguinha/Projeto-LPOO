@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompanyScreen extends JFrame {
+public class CompanyView extends JFrame {
     /**
 	 * 
 	 */
@@ -24,7 +24,7 @@ public class CompanyScreen extends JFrame {
 
     private List<Company> companies = new ArrayList<>();
 
-    public CompanyScreen() {
+    public CompanyView() {
         setTitle("Cadastro de Empresas");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -100,10 +100,4 @@ public class CompanyScreen extends JFrame {
         txtEmail.setText("");
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            CompanyScreen tela = new CompanyScreen();
-            tela.setVisible(true);
-        });
-    }
 }

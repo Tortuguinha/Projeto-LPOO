@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContractScreen extends JFrame {
+public class ContractView extends JFrame {
     /**
 	 * 
 	 */
@@ -27,7 +27,7 @@ public class ContractScreen extends JFrame {
 
     private List<Contract> contracts = new ArrayList<>();
 
-    public ContractScreen() {
+    public ContractView() {
         setTitle("Gestão de Contratos de Empresas");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -105,12 +105,5 @@ public class ContractScreen extends JFrame {
         txtEndDate.setText("");
         txtContractValue.setText("");
         txtObservations.setText("");
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            ContractScreen tela = new ContractScreen();
-            tela.setVisible(true);
-        });
     }
 }
