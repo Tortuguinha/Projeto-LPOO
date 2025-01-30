@@ -12,7 +12,7 @@ public class ServiceScreen extends JFrame {
     private JTextField txtNumero;
 
     // Campos para interface gráfica
-    private JTextField txtNumero;
+    private JTextField TxtNumero;
 
     private JTextField txtCliente;
     private JTextArea txtDescricao;
