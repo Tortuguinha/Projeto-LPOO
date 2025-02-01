@@ -1,81 +1,67 @@
+// EditClient.java
 package app.view;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class EditClient extends JFrame {
-    private static final long serialVersionUID = 1L;
-
-    private JTextField txtNome, txtEmail, txtTelefone;
-    private JComboBox<String> cmbStatus;
-    private JButton btnSalvar, btnCancelar;
     private Client client;
 
     public EditClient(JFrame parent, Client client) {
         this.client = client;
-//
-        // Configurações da janela
         setTitle("Editar Cliente");
         setSize(400, 300);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(parent);
-        setLayout(new GridLayout(5, 2));
 
-        // Adicionando os campos de edição
-        JLabel lblNome = new JLabel("Nome:");
-        JLabel lblEmail = new JLabel("Email:");
-        JLabel lblTelefone = new JLabel("Telefone:");
-        JLabel lblStatus = new JLabel("Status:");
+        // Painel para os campos de edição
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(6, 2)); // Para organizar melhor os campos e botões
 
-        txtNome = new JTextField(client.getNome());
-        txtEmail = new JTextField(client.getEmail());
-        txtTelefone = new JTextField(client.getTelefone());
+        // Campo para Nome
+        panel.add(new JLabel("Nome:"));
+        JTextField nomeField = new JTextField(client.getNome());
+        panel.add(nomeField);
 
-        String[] statusOptions = {"Ativo", "Inativo"};
-        cmbStatus = new JComboBox<>(statusOptions);
-        cmbStatus.setSelectedItem(client.getStatus());
+        // Campo para Email
+        panel.add(new JLabel("Email:"));
+        JTextField emailField = new JTextField(client.getEmail());
+        panel.add(emailField);
 
-        btnSalvar = new JButton("Salvar");
-        btnCancelar = new JButton("Cancelar");
+        // Campo para Telefone
+        panel.add(new JLabel("Telefone:"));
+        JTextField telefoneField = new JTextField(client.getTelefone());
+        panel.add(telefoneField);
 
-        // Ação para salvar as alterações
-        btnSalvar.addActionListener(e -> {
-            String nome = txtNome.getText();
-            String email = txtEmail.getText();
-            String telefone = txtTelefone.getText();
-            String status = (String) cmbStatus.getSelectedItem();
+        // Campo para Status
+        panel.add(new JLabel("Status:"));
+        JTextField statusField = new JTextField(client.getStatus());
+        panel.add(statusField);
 
-            // Atualizando o cliente com os novos valores
-            client = new Client(client.getId(), nome, email, telefone, status);
+        // Botão para salvar as alterações
+        JButton saveButton = new JButton("Salvar");
+        saveButton.addActionListener(e -> {
+            // Lógica para salvar as alterações
+            client.setNome(nomeField.getText());
+            client.setEmail(emailField.getText());
+            client.setTelefone(telefoneField.getText());
+            client.setStatus(statusField.getText());
 
-            // Fechar a tela de edição
-            JOptionPane.showMessageDialog(this, "Cliente editado com sucesso!");
-            dispose();
+            // Mensagem de confirmação
+            JOptionPane.showMessageDialog(this, "Cliente atualizado!");
+            dispose(); // Fecha a tela de edição
         });
 
-        // Ação para cancelar
-        btnCancelar.addActionListener(e -> {
-            dispose(); // Apenas fecha a janela de edição sem salvar
-        });
+        // Adicionando os campos e botão ao painel
+        panel.add(new JLabel()); // Campo vazio para alinhamento
+        panel.add(saveButton);
 
-        // Adicionando os componentes à tela
-        add(lblNome);
-        add(txtNome);
-        add(lblEmail);
-        add(txtEmail);
-        add(lblTelefone);
-        add(txtTelefone);
-        add(lblStatus);
-        add(cmbStatus);
-        add(btnSalvar);
-        add(btnCancelar);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            Client client = new Client(1, "João Silva", "joao@exemplo.com", "123456789", "Ativo");
-            new EditClient(null, client).setVisible(true);
-        });
+        // Adiciona o painel à janela
+        add(panel);
     }
 }

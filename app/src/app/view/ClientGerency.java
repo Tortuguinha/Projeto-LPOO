@@ -1,21 +1,39 @@
-package app.view;
+// ClientGerency.java
+package app.view;  // Pacote onde ClientGerency está localizado
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.awt.event.*;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
+
+import app.view.components.button.EditButton;
+import app.view.components.button.RemoveButton;
 
 public class ClientGerency extends JFrame {
     private static final long serialVersionUID = 1L;
 
     private JTable tableClientes;
     private DefaultTableModel tableModel;
-    private JButton btnEditar;
-    private JButton btnExcluir;
+    private EditButton btnEditar;  // Usando EditButton
+    private RemoveButton btnExcluir;  // Usando RemoveButton
     private int selectedRow = -1;  // Variável para armazenar a linha selecionada
+    private List<Client> clientes;
 
     public ClientGerency(List<Client> clientes) {
+        this.clientes = clientes;
+        
         // Configuração da janela
         configurarJanela();
 
@@ -87,58 +105,9 @@ public class ClientGerency extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        // Botões Editar e Excluir
-        btnEditar = new JButton("Editar");
-        btnExcluir = new JButton("Excluir");
-
-        // Desabilitar botões inicialmente
-        btnEditar.setEnabled(false);
-        btnExcluir.setEnabled(false);
-
-        // Ação para Editar
-        btnEditar.addActionListener(e -> {
-            if (selectedRow >= 0) {
-                int confirm = JOptionPane.showConfirmDialog(this, 
-                        "Você tem certeza que deseja editar este cliente?", 
-                        "Confirmar Edição", JOptionPane.YES_NO_OPTION);
-                if (confirm == JOptionPane.YES_OPTION) {
-                    // Lógica para editar (pode abrir uma tela de edição, por exemplo)
-                    int clientId = (int) tableClientes.getValueAt(selectedRow, 0);
-                    String clientNome = (String) tableClientes.getValueAt(selectedRow, 1);
-                    String clientEmail = (String) tableClientes.getValueAt(selectedRow, 2);
-                    String clientTelefone = (String) tableClientes.getValueAt(selectedRow, 3);
-                    String clientStatus = (String) tableClientes.getValueAt(selectedRow, 4);
-
-                    Client client = new Client(clientId, clientNome, clientEmail, clientTelefone, clientStatus);
-
-                    // Abre a tela de edição
-                    new EditClient(ClientGerency.this, client).setVisible(true);
-                }
-            }
-        });
-
-        // Ação para Excluir
-        btnEditar.addActionListener(evt -> {
-            if (selectedRow >= 0) {
-                int confirm = JOptionPane.showConfirmDialog(this, 
-                        "Você tem certeza que deseja editar este cliente?", 
-                        "Confirmar Edição", JOptionPane.YES_NO_OPTION);
-                if (confirm == JOptionPane.YES_OPTION) {
-                    // Captura os dados da linha selecionada
-                    int clientId = (int) tableClientes.getValueAt(selectedRow, 0);
-                    String clientNome = (String) tableClientes.getValueAt(selectedRow, 1);
-                    String clientEmail = (String) tableClientes.getValueAt(selectedRow, 2);
-                    String clientTelefone = (String) tableClientes.getValueAt(selectedRow, 3);
-                    String clientStatus = (String) tableClientes.getValueAt(selectedRow, 4);
-
-                    // Criar o objeto Client (final)
-                    final Client client = new Client(clientId, clientNome, clientEmail, clientTelefone, clientStatus);
-
-                    // Abre a tela de edição
-                    new EditClient(this, client).setVisible(true);
-                }
-            }
-        });
+        // Instanciando os botões Editar e Excluir
+        btnEditar = new EditButton(this, tableClientes);
+        btnExcluir = new RemoveButton(this, tableClientes, clientes);
 
         panel.add(btnEditar);
         panel.add(btnExcluir);
@@ -154,41 +123,5 @@ public class ClientGerency extends JFrame {
                 new Client(2, "Maria Souza", "maria@exemplo.com", "987654321", "Inativo")
             )).setVisible(true);
         });
-    }
-}
-
-class Client {
-    private int id;
-    private String nome;
-    private String email;
-    private String telefone;
-    private String status;
-
-    public Client(int id, String nome, String email, String telefone, String status) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-        this.status = status;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public String getStatus() {
-        return status;
     }
 }
