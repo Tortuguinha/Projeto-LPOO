@@ -20,6 +20,8 @@ import javax.swing.table.DefaultTableModel;
 
 import app.view.components.button.EditButton;
 import app.view.components.button.RemoveButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ClientGerency extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -52,13 +54,16 @@ public class ClientGerency extends JFrame {
         setSize(800, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
+        getContentPane().setLayout(new BorderLayout());
     }
 
     private void configurarTabela() {
         String[] colunas = {"ID", "Nome", "Email", "Telefone", "Status"};
         tableModel = new DefaultTableModel(colunas, 0) {
-            @Override
+            
+        
+
+		
             public boolean isCellEditable(int row, int column) {
                 return false; // Impede edição das células
             }
@@ -99,7 +104,7 @@ public class ClientGerency extends JFrame {
         // Adicionando a tabela à interface dentro de um JScrollPane
         JScrollPane scrollPane = new JScrollPane(tableClientes);
         scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        add(scrollPane, BorderLayout.CENTER);
+        getContentPane().add(scrollPane, BorderLayout.CENTER);
 
         // Adicionando um painel para os botões
         JPanel panel = new JPanel();
@@ -108,11 +113,15 @@ public class ClientGerency extends JFrame {
         // Instanciando os botões Editar e Excluir
         btnEditar = new EditButton(this, tableClientes);
         btnExcluir = new RemoveButton(this, tableClientes, clientes);
+        btnExcluir.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
 
         panel.add(btnEditar);
         panel.add(btnExcluir);
 
-        add(panel, BorderLayout.SOUTH);
+        getContentPane().add(panel, BorderLayout.SOUTH);
     }
 
     // Método main para testar esta tela separadamente

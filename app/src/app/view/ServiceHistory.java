@@ -13,10 +13,10 @@ public class ServiceHistory extends JFrame {
 
     public ServiceHistory(List<ServiceOrder> ordensServico) {
         setTitle("Histórico de Ordens de Serviço");
-        setSize(600, 300);
+        setSize(600, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
+        getContentPane().setLayout(new BorderLayout());
 
         // Criando tabela
         String[] colunas = {"Número", "Data", "Cliente", "Descrição", "Status", "Valor"};
@@ -43,7 +43,7 @@ public class ServiceHistory extends JFrame {
 
         // Adicionando a tabela à interface
         JScrollPane scrollPane = new JScrollPane(tableHistorico);
-        add(scrollPane, BorderLayout.CENTER);
+        getContentPane().add(scrollPane, BorderLayout.CENTER);
     }
 
     // Método main para testar esta tela separadamente
