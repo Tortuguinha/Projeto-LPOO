@@ -33,56 +33,57 @@ public class SendingEmailWithDetails extends JFrame {
     }
 
     public SendingEmailWithDetails() {
-        setTitle("Sending email with details");
+        setTitle("Detalhamento de Email\r\n");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(300, 100, 750, 550);
         getContentPane().setLayout(null);
 
         JLabel DetailsEmail = new JLabel("Detalhamento Email");
-        DetailsEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        DetailsEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
         DetailsEmail.setBounds(233, 28, 131, 34);
         getContentPane().add(DetailsEmail);
 
-        JLabel De = new JLabel("De   : ");
-        De.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        De.setBounds(20, 96, 46, 14);
+        JLabel De = new JLabel("De : ");
+        De.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        De.setBounds(30, 91, 36, 14);
         getContentPane().add(De);
 
         campotextde = new JTextField();
-        campotextde.setBounds(66, 94, 437, 20);
+        campotextde.setBounds(80, 86, 437, 29);
         getContentPane().add(campotextde);
         campotextde.setColumns(10);
 
         JLabel to = new JLabel("Para : ");
-        to.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        to.setBounds(20, 139, 46, 14);
+        to.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        to.setBounds(20, 133, 46, 14);
         getContentPane().add(to);
 
         campotextpara = new JTextField();
-        campotextpara.setBounds(66, 137, 437, 20);
+        campotextpara.setBounds(80, 126, 437, 32);
         getContentPane().add(campotextpara);
         campotextpara.setColumns(10);
 
-        JLabel subject = new JLabel("Assunto : ");
-        subject.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        subject.setBounds(10, 202, 56, 14);
+        JLabel subject = new JLabel("Assunto: ");
+        subject.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        subject.setBounds(20, 189, 66, 14);
         getContentPane().add(subject);
 
         campotextassunto = new JTextField();
-        campotextassunto.setBounds(65, 200, 438, 20);
+        campotextassunto.setBounds(80, 181, 438, 34);
         getContentPane().add(campotextassunto);
         campotextassunto.setColumns(10);
 
-        JLabel mensagemLabel = new JLabel("Mensagem : ");
-        mensagemLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        mensagemLabel.setBounds(10, 240, 70, 14);
+        JLabel mensagemLabel = new JLabel("Mensagem: ");
+        mensagemLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        mensagemLabel.setBounds(10, 320, 81, 14);
         getContentPane().add(mensagemLabel);
 
         campotextmensagem = new JTextArea();
-        campotextmensagem.setBounds(65, 240, 438, 159);
+        campotextmensagem.setBounds(90, 250, 438, 159);
         getContentPane().add(campotextmensagem);
 
         JButton ToRespond = new JButton("Responder");
+        ToRespond.setFont(new Font("Tahoma", Font.PLAIN, 14));
         ToRespond.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Exemplo de preenchimento automático para resposta
@@ -93,10 +94,11 @@ public class SendingEmailWithDetails extends JFrame {
                 JOptionPane.showMessageDialog(null, "Campos preenchidos para resposta.", "Informação", JOptionPane.INFORMATION_MESSAGE);
             }
         });
-        ToRespond.setBounds(91, 426, 109, 34);
+        ToRespond.setBounds(290, 426, 109, 34);
         getContentPane().add(ToRespond);
 
         JButton btnEnviar = new JButton("Enviar");
+        btnEnviar.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnEnviar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String de = campotextde.getText();
@@ -112,7 +114,7 @@ public class SendingEmailWithDetails extends JFrame {
                 }
             }
         });
-        btnEnviar.setBounds(282, 426, 102, 34);
+        btnEnviar.setBounds(409, 426, 102, 34);
         getContentPane().add(btnEnviar);
     }
 }

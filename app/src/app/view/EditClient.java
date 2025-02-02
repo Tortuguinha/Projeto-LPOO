@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class EditClient extends JFrame {
     private Client client;
@@ -16,7 +17,7 @@ public class EditClient extends JFrame {
     public EditClient(JFrame parent, Client client) {
         this.client = client;
         setTitle("Editar Cliente");
-        setSize(400, 300);
+        setSize(600, 500);
         setLocationRelativeTo(parent);
 
         // Painel para os campos de edição
@@ -26,21 +27,27 @@ public class EditClient extends JFrame {
         // Campo para Nome
         panel.add(new JLabel("Nome:"));
         JTextField nomeField = new JTextField(client.getNome());
+        nomeField.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(nomeField);
 
         // Campo para Email
         panel.add(new JLabel("Email:"));
         JTextField emailField = new JTextField(client.getEmail());
+        emailField.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(emailField);
 
         // Campo para Telefone
         panel.add(new JLabel("Telefone:"));
         JTextField telefoneField = new JTextField(client.getTelefone());
+        telefoneField.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(telefoneField);
 
         // Campo para Status
-        panel.add(new JLabel("Status:"));
+        JLabel label = new JLabel("Status:");
+        label.setHorizontalAlignment(SwingConstants.LEFT);
+        panel.add(label);
         JTextField statusField = new JTextField(client.getStatus());
+        statusField.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(statusField);
 
         // Botão para salvar as alterações
@@ -62,6 +69,6 @@ public class EditClient extends JFrame {
         panel.add(saveButton);
 
         // Adiciona o painel à janela
-        add(panel);
+        getContentPane().add(panel);
     }
 }

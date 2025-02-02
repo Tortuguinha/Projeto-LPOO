@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompanyView extends JFrame {
-    /**
-	 * 
-	 */
+    
 	private static final long serialVersionUID = 1L;
 	private JTextField txtCompanyName;
     private JTextField txtCnpj;
