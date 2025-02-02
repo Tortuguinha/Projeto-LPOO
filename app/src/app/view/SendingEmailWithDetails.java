@@ -92,6 +92,7 @@ public class SendingEmailWithDetails extends JFrame {
                 campotextmensagem.setText("Resposta: \n" + campotextmensagem.getText());
 
                 JOptionPane.showMessageDialog(null, "Campos preenchidos para resposta.", "Informação", JOptionPane.INFORMATION_MESSAGE);
+                System.out.println("Campos preenchidos para resposta.");
             }
         });
         ToRespond.setBounds(290, 426, 109, 34);
@@ -108,9 +109,11 @@ public class SendingEmailWithDetails extends JFrame {
 
                 if (de.isEmpty() || para.isEmpty() || assunto.isEmpty() || mensagem.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    System.out.println("Erro: Por favor, preencha todos os campos.");
                 } else {
                     // Aqui você pode adicionar a lógica para enviar o email
                     JOptionPane.showMessageDialog(null, "Email enviado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    System.out.println("Email enviado com sucesso!");
                 }
             }
         });

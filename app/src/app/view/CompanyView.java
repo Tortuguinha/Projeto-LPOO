@@ -27,7 +27,7 @@ public class CompanyView extends JFrame {
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
+        getContentPane().setLayout(new BorderLayout());
 
         // Painel do formulário
         JPanel panelForm = new JPanel(new GridLayout(5, 2, 10, 10));
@@ -37,21 +37,40 @@ public class CompanyView extends JFrame {
         txtAddress = new JTextField();
         txtEmail = new JTextField();
 
-        panelForm.add(new JLabel("Nome da Empresa:"));
+        JLabel label = new JLabel("Nome da Empresa:");
+        label.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        panelForm.add(label);
         panelForm.add(txtCompanyName);
-        panelForm.add(new JLabel("CNPJ:"));
+        JLabel label_1 = new JLabel("CNPJ:");
+        label_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        label_1.setHorizontalAlignment(SwingConstants.CENTER);
+        panelForm.add(label_1);
         panelForm.add(txtCnpj);
-        panelForm.add(new JLabel("Telefone:"));
+        JLabel label_2 = new JLabel("Telefone:");
+        label_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        label_2.setHorizontalAlignment(SwingConstants.CENTER);
+        panelForm.add(label_2);
         panelForm.add(txtPhone);
-        panelForm.add(new JLabel("Endereço:"));
+        JLabel label_3 = new JLabel("Endereço:");
+        label_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        label_3.setHorizontalAlignment(SwingConstants.CENTER);
+        panelForm.add(label_3);
         panelForm.add(txtAddress);
-        panelForm.add(new JLabel("E-mail:"));
+        JLabel label_4 = new JLabel("E-mail:");
+        label_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        label_4.setHorizontalAlignment(SwingConstants.CENTER);
+        panelForm.add(label_4);
         panelForm.add(txtEmail);
 
         // Botões
         JPanel panelButtons = new JPanel(new FlowLayout());
         btnSave = new JButton("Salvar");
+        btnSave.setForeground(SystemColor.textHighlight);
+        btnSave.setFont(new Font("Tahoma", Font.PLAIN, 12));
         btnClear = new JButton("Limpar");
+        btnClear.setForeground(SystemColor.textHighlight);
+        btnClear.setFont(new Font("Tahoma", Font.PLAIN, 12));
         panelButtons.add(btnSave);
         panelButtons.add(btnClear);
 
@@ -60,9 +79,9 @@ public class CompanyView extends JFrame {
         tableCompanies = new JTable(tableModel);
         JScrollPane tableScroll = new JScrollPane(tableCompanies);
 
-        add(panelForm, BorderLayout.NORTH);
-        add(tableScroll, BorderLayout.CENTER);
-        add(panelButtons, BorderLayout.SOUTH);
+        getContentPane().add(panelForm, BorderLayout.NORTH);
+        getContentPane().add(tableScroll, BorderLayout.CENTER);
+        getContentPane().add(panelButtons, BorderLayout.SOUTH);
 
         // Ações dos botões
         btnSave.addActionListener(e -> saveCompany());
