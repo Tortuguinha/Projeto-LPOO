@@ -1,16 +1,16 @@
-// ClientGerency.java
 package app.view;  // Pacote onde ClientGerency está localizado
-
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
-
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -20,8 +20,6 @@ import javax.swing.table.DefaultTableModel;
 
 import app.view.components.button.EditButton;
 import app.view.components.button.RemoveButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class ClientGerency extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -32,10 +30,12 @@ public class ClientGerency extends JFrame {
     private RemoveButton btnExcluir;  // Usando RemoveButton
     private int selectedRow = -1;  // Variável para armazenar a linha selecionada
     private List<Client> clientes;
+    private DashboardView parent;
 
-    public ClientGerency(List<Client> clientes) {
+    public ClientGerency(List<Client> clientes, DashboardView parent) {
         this.clientes = clientes;
-        
+        this.parent = parent;
+
         // Configuração da janela
         configurarJanela();
 
@@ -60,10 +60,6 @@ public class ClientGerency extends JFrame {
     private void configurarTabela() {
         String[] colunas = {"ID", "Nome", "Email", "Telefone", "Status"};
         tableModel = new DefaultTableModel(colunas, 0) {
-            
-        
-
-		
             public boolean isCellEditable(int row, int column) {
                 return false; // Impede edição das células
             }
@@ -114,12 +110,23 @@ public class ClientGerency extends JFrame {
         btnEditar = new EditButton(this, tableClientes);
         btnExcluir = new RemoveButton(this, tableClientes, clientes);
         btnExcluir.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	}
+            public void actionPerformed(ActionEvent e) {
+                // Lógica de remoção do cliente
+            }
+        });
+
+        // Botão de Voltar
+        JButton btnVoltar = new JButton("Voltar");
+        btnVoltar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                parent.setVisible(true);
+                dispose();
+            }
         });
 
         panel.add(btnEditar);
         panel.add(btnExcluir);
+        panel.add(btnVoltar);
 
         getContentPane().add(panel, BorderLayout.SOUTH);
     }
@@ -130,7 +137,7 @@ public class ClientGerency extends JFrame {
             new ClientGerency(List.of(
                 new Client(1, "João Silva", "joao@exemplo.com", "123456789", "Ativo"),
                 new Client(2, "Maria Souza", "maria@exemplo.com", "987654321", "Inativo")
-            )).setVisible(true);
+            ), null).setVisible(true);
         });
     }
 }

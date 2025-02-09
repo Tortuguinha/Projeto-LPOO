@@ -51,59 +51,71 @@ public class ServiceScreen extends JFrame {
         getContentPane().setLayout(new BorderLayout());
 
         // Painel do formulário
-        JPanel panelForm = new JPanel(new GridLayout(6, 2, 10, 10));
+        JPanel panelForm = new JPanel();
         txtNumero = new JTextField();
-        txtNumero.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        txtNumero.setBounds(192, 26, 392, 39);
+        txtNumero.setFont(new Font("Tahoma", Font.PLAIN, 13));
         txtCliente = new JTextField();
-        txtCliente.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        txtDescricao = new JTextArea(3, 20);
-        txtDescricao.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        txtCliente.setBounds(192, 87, 392, 39);
+        txtCliente.setFont(new Font("Tahoma", Font.PLAIN, 13));
         cbStatus = new JComboBox<>(new String[] { "Aberto", "Fechado", "Pendente" });
+        cbStatus.setBounds(182, 231, 87, 39);
         cbStatus.setFont(new Font("Tahoma", Font.PLAIN, 13));
         txtValorTotal = new JTextField();
+        txtValorTotal.setBounds(192, 299, 392, 44);
         txtValorTotal.setHorizontalAlignment(SwingConstants.LEFT);
-        txtValorTotal.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        txtValorTotal.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        panelForm.setLayout(null);
 
         JLabel label_4 = new JLabel("Número da OS:");
+        label_4.setBounds(68, 25, 131, 39);
         label_4.setHorizontalAlignment(SwingConstants.CENTER);
         label_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
         panelForm.add(label_4);
         panelForm.add(txtNumero);
         JLabel label_3 = new JLabel("Cliente:");
+        label_3.setBounds(106, 86, 107, 39);
         label_3.setHorizontalAlignment(SwingConstants.CENTER);
         label_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
         panelForm.add(label_3);
         panelForm.add(txtCliente);
         JLabel label_2 = new JLabel("Descrição do Serviço:");
+        label_2.setBounds(37, 157, 163, 39);
         label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
         label_2.setHorizontalAlignment(SwingConstants.CENTER);
         panelForm.add(label_2);
-        panelForm.add(new JScrollPane(txtDescricao));
         JLabel label_1 = new JLabel("Status:");
+        label_1.setBounds(106, 232, 87, 34);
         label_1.setHorizontalAlignment(SwingConstants.CENTER);
         label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
         panelForm.add(label_1);
         panelForm.add(cbStatus);
         JLabel label = new JLabel("Valor Total:");
+        label.setBounds(81, 300, 119, 39);
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setFont(new Font("Tahoma", Font.PLAIN, 15));
         panelForm.add(label);
         panelForm.add(txtValorTotal);
 
-        // Painel de botões
-        JPanel panelButtons = new JPanel(new FlowLayout());
-        btnSalvar = new JButton("Salvar");
-        btnSalvar.setForeground(SystemColor.textHighlight);
-        btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        btnLimpar = new JButton("Limpar");
-        btnLimpar.setForeground(SystemColor.textHighlight);
-        btnLimpar.setHorizontalAlignment(SwingConstants.RIGHT);
-        btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        panelButtons.add(btnSalvar);
-        panelButtons.add(btnLimpar);
-
         getContentPane().add(panelForm, BorderLayout.CENTER);
-        getContentPane().add(panelButtons, BorderLayout.SOUTH);
+        txtDescricao = new JTextArea(3, 20);
+        txtDescricao.setBounds(192, 152, 392, 62);
+        panelForm.add(txtDescricao);
+        txtDescricao.setFont(new Font("Monospaced", Font.PLAIN, 14));
+        
+                // Painel de botões
+                JPanel panelButtons = new JPanel(new FlowLayout());
+                panelButtons.setBounds(0, 391, 584, 35);
+                panelForm.add(panelButtons);
+                btnSalvar = new JButton("Salvar");
+                btnSalvar.setForeground(SystemColor.textHighlight);
+                btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+                btnLimpar = new JButton("Limpar");
+                btnLimpar.setForeground(SystemColor.textHighlight);
+                btnLimpar.setHorizontalAlignment(SwingConstants.RIGHT);
+                btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+                panelButtons.add(btnSalvar);
+                panelButtons.add(btnLimpar);
 
         // Ações dos botões
         btnSalvar.addActionListener(e -> salvarOrdemServico());

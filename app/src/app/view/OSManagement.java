@@ -8,47 +8,64 @@ import java.awt.event.ActionEvent;
 public class OSManagement extends JFrame {
     private JTextField numeroOsField, dataAberturaField, clienteField, descricaoField, equipamentosField, statusField, valorTotalField, valorPagoField;
     private JButton cadastrarButton;
+    private JButton ButtonVoltar;
     
     public OSManagement() {
         setTitle("Gerenciamento de OS");
         setSize(600, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        getContentPane().setLayout(new GridLayout(9, 2, 5, 5));
         
         JLabel numeroOsLabel = new JLabel("Número da OS:");
+        numeroOsLabel.setBounds(56, 23, 137, 33);
         numeroOsLabel.setHorizontalAlignment(SwingConstants.CENTER);
         numeroOsLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
         numeroOsField = new JTextField();
+        numeroOsField.setBounds(188, 31, 289, 20);
         JLabel dataAberturaLabel = new JLabel("Data de Abertura:");
+        dataAberturaLabel.setBounds(61, 67, 110, 33);
         dataAberturaLabel.setHorizontalAlignment(SwingConstants.CENTER);
         dataAberturaLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
         dataAberturaField = new JTextField();
+        dataAberturaField.setBounds(188, 75, 289, 20);
         JLabel clienteLabel = new JLabel("Cliente:");
+        clienteLabel.setBounds(87, 111, 119, 33);
         clienteLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         clienteLabel.setHorizontalAlignment(SwingConstants.CENTER);
         clienteField = new JTextField();
+        clienteField.setBounds(188, 116, 289, 27);
         JLabel descricaoLabel = new JLabel("Descrição do Serviço:");
+        descricaoLabel.setBounds(34, 161, 153, 33);
         descricaoLabel.setHorizontalAlignment(SwingConstants.CENTER);
         descricaoLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         descricaoField = new JTextField();
+        descricaoField.setBounds(188, 162, 289, 46);
         JLabel equipamentosLabel = new JLabel("Equipamentos Envolvidos:");
+        equipamentosLabel.setBounds(10, 205, 171, 48);
         equipamentosLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         equipamentosLabel.setHorizontalAlignment(SwingConstants.CENTER);
         equipamentosField = new JTextField();
+        equipamentosField.setBounds(188, 219, 289, 46);
         JLabel statusLabel = new JLabel("Status:");
+        statusLabel.setBounds(102, 276, 90, 27);
         statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
         statusLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         statusField = new JTextField();
+        statusField.setBounds(188, 278, 289, 27);
         JLabel valorTotalLabel = new JLabel("Valor Total:");
+        valorTotalLabel.setBounds(74, 322, 119, 33);
         valorTotalLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         valorTotalLabel.setHorizontalAlignment(SwingConstants.CENTER);
         valorTotalField = new JTextField();
+        valorTotalField.setBounds(188, 327, 289, 27);
         JLabel valorPagoLabel = new JLabel("Valor Pago:");
+        valorPagoLabel.setBounds(74, 366, 119, 33);
         valorPagoLabel.setHorizontalAlignment(SwingConstants.CENTER);
         valorPagoLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         valorPagoField = new JTextField();
+        valorPagoField.setBounds(188, 374, 289, 20);
         cadastrarButton = new JButton("Cadastrar");
+        cadastrarButton.setBounds(374, 411, 171, 33);
         cadastrarButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String numeroOs = numeroOsField.getText();
@@ -115,6 +132,7 @@ public class OSManagement extends JFrame {
         });
         cadastrarButton.setForeground(SystemColor.textHighlight);
         cadastrarButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        getContentPane().setLayout(null);
         
         getContentPane().add(numeroOsLabel);
         getContentPane().add(numeroOsField);
@@ -132,8 +150,20 @@ public class OSManagement extends JFrame {
         getContentPane().add(valorTotalField);
         getContentPane().add(valorPagoLabel);
         getContentPane().add(valorPagoField);
-        getContentPane().add(new JLabel());
         getContentPane().add(cadastrarButton);
+        
+        ButtonVoltar = new JButton("Voltar\r\n");
+        ButtonVoltar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		DashboardView dashboardView = new DashboardView();
+                dashboardView.setVisible(true);
+                
+        	}
+        });
+        ButtonVoltar.setForeground(SystemColor.textHighlight);
+        ButtonVoltar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        ButtonVoltar.setBounds(186, 411, 128, 33);
+        getContentPane().add(ButtonVoltar);
     }
 
     private boolean validarData(String data) {

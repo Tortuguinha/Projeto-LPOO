@@ -32,7 +32,7 @@ public class ContractView extends JFrame {
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
+        getContentPane().setLayout(new BorderLayout());
 
         // Painel do formulário
         JPanel panelForm = new JPanel(new GridLayout(6, 2, 10, 10));
@@ -43,23 +43,44 @@ public class ContractView extends JFrame {
         txtContractValue = new JTextField();
         txtObservations = new JTextArea(3, 20);
 
-        panelForm.add(new JLabel("Nome da Empresa:"));
+        JLabel label_4 = new JLabel("Nome da Empresa:");
+        label_4.setHorizontalAlignment(SwingConstants.CENTER);
+        label_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        panelForm.add(label_4);
         panelForm.add(txtCompanyName);
-        panelForm.add(new JLabel("CNPJ:"));
+        JLabel label_3 = new JLabel("CNPJ:");
+        label_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        label_3.setHorizontalAlignment(SwingConstants.CENTER);
+        panelForm.add(label_3);
         panelForm.add(txtCnpj);
-        panelForm.add(new JLabel("Data de Início (yyyy-MM-dd):"));
+        JLabel label = new JLabel("Data de Início \r\n");
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        panelForm.add(label);
         panelForm.add(txtStartDate);
-        panelForm.add(new JLabel("Data de Término (yyyy-MM-dd):"));
+        JLabel lblDataDeTrmino = new JLabel("Data de Término\r\n");
+        lblDataDeTrmino.setHorizontalAlignment(SwingConstants.CENTER);
+        lblDataDeTrmino.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        panelForm.add(lblDataDeTrmino);
         panelForm.add(txtEndDate);
-        panelForm.add(new JLabel("Valor do Contrato:"));
+        JLabel label_2 = new JLabel("Valor do Contrato:");
+        label_2.setHorizontalAlignment(SwingConstants.CENTER);
+        label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        panelForm.add(label_2);
         panelForm.add(txtContractValue);
-        panelForm.add(new JLabel("Observações:"));
+        JLabel label_1 = new JLabel("Observações:");
+        label_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        label_1.setHorizontalAlignment(SwingConstants.CENTER);
+        panelForm.add(label_1);
         panelForm.add(new JScrollPane(txtObservations));
 
         // Botões
         JPanel panelButtons = new JPanel(new FlowLayout());
         btnSave = new JButton("Salvar");
+        btnSave.setForeground(SystemColor.textHighlight);
+        btnSave.setFont(new Font("Tahoma", Font.PLAIN, 13));
         btnClear = new JButton("Limpar");
+        btnClear.setForeground(SystemColor.textHighlight);
         panelButtons.add(btnSave);
         panelButtons.add(btnClear);
 
@@ -68,9 +89,9 @@ public class ContractView extends JFrame {
         tableContracts = new JTable(tableModel);
         JScrollPane tableScroll = new JScrollPane(tableContracts);
 
-        add(panelForm, BorderLayout.NORTH);
-        add(tableScroll, BorderLayout.CENTER);
-        add(panelButtons, BorderLayout.SOUTH);
+        getContentPane().add(panelForm, BorderLayout.NORTH);
+        getContentPane().add(tableScroll, BorderLayout.CENTER);
+        getContentPane().add(panelButtons, BorderLayout.SOUTH);
 
         // Ações dos botões
         btnSave.addActionListener(e -> saveContract());
