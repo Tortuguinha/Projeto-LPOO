@@ -120,9 +120,4 @@ public class EditClient extends JFrame {
         getContentPane().add(panel);
     }
 
-    public static void main(String[] args) {
-        Client client = new Client("Nome Exemplo", "email@example.com", "123456789012", "Ativo");
-        EditClient editClient = new EditClient(client);
-        editClient.setVisible(true);
-    }
 }
