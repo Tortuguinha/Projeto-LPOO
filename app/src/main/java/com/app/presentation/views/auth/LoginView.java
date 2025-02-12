@@ -41,7 +41,7 @@ public class LoginView extends JFrame {
         txtSenha.setHorizontalAlignment(SwingConstants.CENTER);
         txtSenha.setFont(new Font("Tahoma", Font.PLAIN, 15));
         JButton btnLogin = new JButton("Entrar");
-        btnLogin.setBounds(241, 239, 112, 34);
+        btnLogin.setBounds(241, 245, 112, 34);
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                
@@ -60,17 +60,15 @@ public class LoginView extends JFrame {
         label.setBounds(0, 300, 129, 45);
         getContentPane().add(label); // Espaço vazio
         getContentPane().add(btnLogin);
-        JLabel label_1 = new JLabel();
-        label_1.setBounds(0, 345, 292, 115);
-        getContentPane().add(label_1); // Espaço vazio
         
         JLabel LabelTelaDeLogin = new JLabel("Tela De Login");
+        LabelTelaDeLogin.setBounds(248, 34, 105, 29);
         LabelTelaDeLogin.setHorizontalAlignment(SwingConstants.CENTER);
         LabelTelaDeLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        LabelTelaDeLogin.setBounds(248, 34, 105, 29);
         getContentPane().add(LabelTelaDeLogin);
         
         JButton btnEsqueceuSenha = new JButton("Esqueceu Senha");
+        btnEsqueceuSenha.setBounds(228, 300, 143, 34);
         btnEsqueceuSenha.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
  
@@ -78,11 +76,19 @@ public class LoginView extends JFrame {
         });
         btnEsqueceuSenha.setForeground(SystemColor.textHighlight);
         btnEsqueceuSenha.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        btnEsqueceuSenha.setBounds(224, 284, 143, 34);
         getContentPane().add(btnEsqueceuSenha);
+        
+        JButton btnCadrastarFuncionario = new JButton("Cadrastar Funcionario");
+        btnCadrastarFuncionario.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        btnCadrastarFuncionario.setForeground(SystemColor.textHighlight);
+        btnCadrastarFuncionario.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        btnCadrastarFuncionario.setBounds(212, 350, 179, 34);
+        getContentPane().add(btnCadrastarFuncionario);
 
         setLocationRelativeTo(null); // Centraliza a janela
         setVisible(true);
 	}
-
 }
