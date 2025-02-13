@@ -5,8 +5,29 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.app</groupId>
-    <artifactId>backend</artifactId>
+    <artifactId>app</artifactId>
     <version>1.0-SNAPSHOT</version>
+    
+    <build>
+	    <plugins>
+	        <plugin>
+	            <groupId>org.codehaus.mojo</groupId>
+	            <artifactId>exec-maven-plugin</artifactId>
+	            <version>3.5.0</version>
+	            <configuration>
+	                <mainClass>com.app.Main</mainClass>
+	            </configuration>
+	        </plugin>
+	    </plugins>
+	</build>
+    
+    <dependencies>
+	    <dependency>
+		    <groupId>com.mysql</groupId>
+		    <artifactId>mysql-connector-j</artifactId>
+		    <version>9.2.0</version>
+		</dependency>
+    </dependencies>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
