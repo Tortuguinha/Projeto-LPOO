@@ -1,20 +1,20 @@
-package com.app.domain.entities;
+package com.app.domain.entities.employee;
 
 import java.util.Date;;
 
 public class EmployeeEntity {
 	
 	public enum ROLE {
-		ADMIN,
-		ATTENDANT,
-		TECHNICIAN
+		ADMINISTRADOR,
+		ATENDENTE,
+		TECNICO
 	}
 	
 	private String Name;
 	private String Email;
 	private String Password;
 	private String CPF;
-	private ROLE Role = ROLE.ATTENDANT;
+	private ROLE Role = ROLE.ATENDENTE;
 	private Date Admission_date;
 	private Boolean Status = true;
 	private Date Latest_login;
@@ -24,7 +24,7 @@ public class EmployeeEntity {
 		this.Email = email;
 		this.Password = password;
 		this.CPF = cpf;
-		this.Role = role != null ? role : ROLE.ATTENDANT;
+		this.Role = role != null ? role : ROLE.ATENDENTE;
 		this.Admission_date = admission_date != null ? admission_date : new Date();
 		this.Status = status != null ? status : true;
 	}

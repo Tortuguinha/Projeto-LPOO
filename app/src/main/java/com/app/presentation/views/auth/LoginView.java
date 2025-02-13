@@ -12,14 +12,22 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
+
+import com.app.presentation.views.employee.EmployeeRegisterView;
 
 public class LoginView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private EmployeeRegisterView _employeeRegisterView;
 
-	public LoginView() {
+	public LoginView(EmployeeRegisterView employeeRegisterView) {
+		this._employeeRegisterView = employeeRegisterView;
+		
+		this.components();
+	}
+	
+	public void components() {
 		setTitle("Tela de Login");
         setSize(600, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,6 +89,8 @@ public class LoginView extends JFrame {
         JButton btnCadrastarFuncionario = new JButton("Cadrastar Funcionario");
         btnCadrastarFuncionario.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		_employeeRegisterView.setVisible(true);
+        		dispose();
         	}
         });
         btnCadrastarFuncionario.setForeground(SystemColor.textHighlight);
@@ -91,4 +101,6 @@ public class LoginView extends JFrame {
         setLocationRelativeTo(null); // Centraliza a janela
         setVisible(true);
 	}
+
+
 }

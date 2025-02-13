@@ -22,27 +22,27 @@ public class DatabaseInitializer implements IDatabaseInitializer {
 	}
 	
 	private static String createEmployeeTable() {
-	    return """
-	        CREATE TABLE IF NOT EXISTS employee (
-	            id INT AUTO_INCREMENT PRIMARY KEY,
-	            name VARCHAR(255) NOT NULL,
-	            cpf CHAR(11) UNIQUE NOT NULL CHECK (cpf REGEXP '^[0-9]{11}$'), 
-	            password VARCHAR(255) NOT NULL,
-	            role ENUM('ADMIN', 'EMPLOYEE') DEFAULT 'EMPLOYEE',
-	            admission_date DATE NOT NULL,
-	            status BOOLEAN DEFAULT TRUE,
-	            latest_login DATETIME NULL
-	        );
-	    """;
+		return """
+		        CREATE TABLE IF NOT EXISTS employee (
+				    id INT AUTO_INCREMENT PRIMARY KEY,
+				    name VARCHAR(255) NOT NULL,
+				    email VARCHAR(255) NOT NULL UNIQUE,
+				    password VARCHAR(255) NOT NULL,
+				    cpf CHAR(11) UNIQUE NOT NULL,
+				    role ENUM('ADMINISTRADOR', 'ATENDENTE', 'TECNICO') DEFAULT 'ATENDENTE',
+				    admission_date DATE NOT NULL,
+				    status BOOLEAN DEFAULT TRUE
+				);
+		    """;
 	}
 
     private static String createContactsTable() {
         return """
-            CREATE TABLE IF NOT EXISTS contacts (
+            CREATE TABLE IF NOT EXISTS contact (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 user_id INT NOT NULL,
-                telephone VARCHAR(20) NOT NULL CHECK (LENGTH(telephone) BETWEEN 10 AND 15),
-                email VARCHAR(255) NOT NULL,
+                telephone VARCHAR(20) NOT NULL,
+                email VARCHAR(255) NOT NULL UNIQUE,
                 FOREIGN KEY (user_id) REFERENCES employee(id) ON DELETE CASCADE
             );
         """;
@@ -50,10 +50,10 @@ public class DatabaseInitializer implements IDatabaseInitializer {
 
     private static String createAddressesTable() {
         return """
-            CREATE TABLE IF NOT EXISTS addresses (
+            CREATE TABLE IF NOT EXISTS address (
                 address_id INT AUTO_INCREMENT PRIMARY KEY,
                 user_id INT NOT NULL,
-                number INT NOT NULL CHECK (number > 0),
+                number INT NOT NULL,
                 street VARCHAR(255) NOT NULL,
                 district VARCHAR(255) NOT NULL,
                 city VARCHAR(255) NOT NULL,
