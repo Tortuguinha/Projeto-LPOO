@@ -1,0 +1,29 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: sqldb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+    ports:
+      - "3306:3306"
+    networks:
+      - meu-network
+
+  app:
+    build: .
+    container_name: app
+    depends_on:
+      - mysql
+    environment:
+      - DISPLAY=${DISPLAY}
+    networks:
+      - network-app
+    volumes:
+      - .:/app
+    network_mode: "host"
+
+networks:
+  meu-network:
+    driver: bridge

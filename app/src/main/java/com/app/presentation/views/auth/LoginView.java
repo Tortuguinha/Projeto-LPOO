@@ -8,11 +8,15 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import com.app.domain.entities.employee.EmployeeEntity;
+import com.app.infrastructure.controllers.interfaces.IEmployeeController;
+import com.app.presentation.views.DashboardView;
 import com.app.presentation.views.employee.EmployeeRegisterView;
 
 public class LoginView extends JFrame {
@@ -20,8 +24,14 @@ public class LoginView extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private EmployeeRegisterView _employeeRegisterView;
+	
+	private final IEmployeeController _employeeController;
 
-	public LoginView(EmployeeRegisterView employeeRegisterView) {
+	public LoginView(IEmployeeController employeeController, 
+			EmployeeRegisterView employeeRegisterView
+			) {
+		
+		this._employeeController = employeeController;
 		this._employeeRegisterView = employeeRegisterView;
 		
 		this.components();
@@ -41,18 +51,21 @@ public class LoginView extends JFrame {
         lblSenha.setBounds(107, 166, 112, 38);
         lblSenha.setHorizontalAlignment(SwingConstants.CENTER);
         lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        JTextField txtUsuario = new JTextField();
-        txtUsuario.setBounds(189, 98, 231, 25);
-        txtUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-        JPasswordField txtSenha = new JPasswordField();
-        txtSenha.setBounds(189, 173, 231, 25);
-        txtSenha.setHorizontalAlignment(SwingConstants.CENTER);
-        txtSenha.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        JTextField emailField = new JTextField();
+        emailField.setBounds(189, 98, 231, 25);
+        emailField.setHorizontalAlignment(SwingConstants.CENTER);
+        JPasswordField pwdField = new JPasswordField();
+        pwdField.setBounds(189, 173, 231, 25);
+        pwdField.setHorizontalAlignment(SwingConstants.CENTER);
+        pwdField.setFont(new Font("Tahoma", Font.PLAIN, 15));
         JButton btnLogin = new JButton("Entrar");
         btnLogin.setBounds(241, 245, 112, 34);
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               
+            	String email = emailField.getText();
+            	String password = new String(pwdField.getPassword());
+            	
+            	handleEmployeeLogin(email, password);
             }
         });
         btnLogin.setForeground(SystemColor.textHighlight);
@@ -61,9 +74,9 @@ public class LoginView extends JFrame {
 
         // Adicionando componentes à janela
         getContentPane().add(lblUsuario);
-        getContentPane().add(txtUsuario);
+        getContentPane().add(emailField);
         getContentPane().add(lblSenha);
-        getContentPane().add(txtSenha);
+        getContentPane().add(pwdField);
         JLabel label = new JLabel();
         label.setBounds(0, 300, 129, 45);
         getContentPane().add(label); // Espaço vazio
@@ -79,7 +92,6 @@ public class LoginView extends JFrame {
         btnEsqueceuSenha.setBounds(228, 300, 143, 34);
         btnEsqueceuSenha.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
- 
             }
         });
         btnEsqueceuSenha.setForeground(SystemColor.textHighlight);
@@ -100,6 +112,20 @@ public class LoginView extends JFrame {
 
         setLocationRelativeTo(null); // Centraliza a janela
         setVisible(true);
+	}
+	
+	public void handleEmployeeLogin(String email, String password) {
+		try {
+			EmployeeEntity employee = _employeeController.authenticate(email, password);
+			System.out.println("Logado com sucesso, boas-vindas " + employee.getName());
+			
+			JOptionPane.showMessageDialog(null, "Login realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+			
+			new DashboardView(employee, _employeeController).setVisible(true);
+			dispose();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 

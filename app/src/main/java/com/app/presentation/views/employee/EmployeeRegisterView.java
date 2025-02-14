@@ -22,6 +22,8 @@ import com.app.domain.entities.employee.EmployeeAddressEntity;
 import com.app.domain.entities.employee.EmployeeContactEntity;
 import com.app.domain.entities.employee.EmployeeEntity;
 import com.app.infrastructure.controllers.interfaces.IEmployeeController;
+import com.app.presentation.views.DashboardView;
+import com.app.presentation.views.auth.LoginView;
 
 public class EmployeeRegisterView extends JFrame {
 
@@ -63,9 +65,10 @@ public class EmployeeRegisterView extends JFrame {
 	private JButton voltarButton;
 	
 	private final IEmployeeController _employeeController;
-	
+	private EmployeeEntity _loggedEmployee;
 
-	public EmployeeRegisterView(IEmployeeController employeeController) {
+	public EmployeeRegisterView(IEmployeeController employeeController,  EmployeeEntity loggedEmployee) {
+		this._loggedEmployee = loggedEmployee;
 		this._employeeController = employeeController;
 		this.components();
 	}
@@ -236,6 +239,26 @@ public class EmployeeRegisterView extends JFrame {
         voltarButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
         voltarButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	if(_loggedEmployee != null) {
+            		DashboardView dashboardView  = new DashboardView(_loggedEmployee, _employeeController); 
+            		dashboardView.setVisible(true);
+                	dispose();
+            	} else {
+            		/* @Jorge Lemos
+                	 * Deixei null ate encontrar outra forma de resolver isso
+                	 * Qual o problema?
+                	 * Ao entrar na tela de cadastro de funcionario pelo login,
+                	 * e possivel voltar a tela de login, no entanto,
+                	 * ao tentar entrar em cadastro de funcionario
+                	 * e possivel se deparar com um erro pois o LoginView retorna null
+                	 * onde deveria estar a instancia de EmployeeRegisterView
+                	 * */
+            		LoginView loginView = new LoginView(_employeeController, null); 
+                	loginView.setVisible(true);
+                	dispose();
+            	}
+            	
+            	
             }
         });
         getContentPane().add(voltarButton);

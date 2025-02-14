@@ -17,13 +17,13 @@ public class Main {
     	final EmployeeFactory employeeFactory = new EmployeeFactory();
     	
     	// Views
-    	final EmployeeRegisterView employeeRegisterView = new EmployeeRegisterView(employeeFactory.registerEmployee());
+    	final EmployeeRegisterView employeeRegisterView = new EmployeeRegisterView(employeeFactory.createEmployeeController(), null);
     	
     	EventQueue.invokeLater(new Runnable() {    		
 			public void run() {
 				try {
 					databaseInit.execute();
-					LoginView frame = new LoginView(employeeRegisterView);
+					LoginView frame = new LoginView(employeeFactory.createEmployeeController(), employeeRegisterView);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

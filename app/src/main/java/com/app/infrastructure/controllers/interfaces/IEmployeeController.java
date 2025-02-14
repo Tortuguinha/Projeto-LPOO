@@ -6,4 +6,5 @@ import com.app.domain.entities.employee.EmployeeEntity;
 
 public interface IEmployeeController {
 	public void register(EmployeeEntity employee, EmployeeContactEntity contact, EmployeeAddressEntity address);
+	public EmployeeEntity authenticate(String email, String password);
 }

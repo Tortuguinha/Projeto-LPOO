@@ -10,6 +10,7 @@ public class EmployeeEntity {
 		TECNICO
 	}
 	
+	private int Id;
 	private String Name;
 	private String Email;
 	private String Password;
@@ -64,5 +65,9 @@ public class EmployeeEntity {
 	
 	public Date getLatestLogin() {
 		return this.Latest_login;
+	}
+	
+	public void setId(int id) {
+		this.Id = id;
 	}
 }

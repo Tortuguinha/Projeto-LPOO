@@ -14,8 +14,6 @@ public class DatabaseInitializer implements IDatabaseInitializer {
 			query.execute(createEmployeeTable());
 			query.execute(createContactsTable());
 			query.execute(createAddressesTable());
-			
-			System.out.print("Sistema: Tabelas criadas com sucesso");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

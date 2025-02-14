@@ -6,4 +6,5 @@ import com.app.domain.entities.employee.EmployeeEntity;
 
 public interface IEmployeeRepository {
 	public void save(EmployeeEntity employee, EmployeeContactEntity contact, EmployeeAddressEntity address);
+	public EmployeeEntity findByEmail(String email);
 }

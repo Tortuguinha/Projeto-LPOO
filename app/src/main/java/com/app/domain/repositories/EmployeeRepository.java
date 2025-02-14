@@ -3,6 +3,7 @@ package com.app.domain.repositories;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import com.app.domain.entities.employee.EmployeeAddressEntity;
 import com.app.domain.entities.employee.EmployeeContactEntity;
@@ -62,9 +63,44 @@ public class EmployeeRepository implements IEmployeeRepository {
 	            queryAddress.executeUpdate();
 			}
 			
-			System.out.println("Funcionário, contato e endereço criados com sucesso");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public EmployeeEntity findByEmail(String email) {
+		
+		
+		String sql = "SELECT id, name, email, password, cpf, role, admission_date, status FROM employee WHERE email = ?";
+		
+		try (Connection connection = DatabaseConfig.getConnection()) {
+		
+			PreparedStatement query = connection.prepareStatement(sql);
+			query.setString(1, email);
+			
+			ResultSet resultSet = query.executeQuery();
+			
+			if(resultSet.next()) {
+				int id = resultSet.getInt("id");
+	            String name = resultSet.getString("name");
+	            String employeeEmail = resultSet.getString("email");
+	            String password = resultSet.getString("password");
+	            String cpf = resultSet.getString("cpf");
+	            EmployeeEntity.ROLE role = EmployeeEntity.ROLE.valueOf(resultSet.getString("role"));
+	            Date admissionDate = resultSet.getDate("admission_date");
+	            Boolean status = resultSet.getBoolean("status");
+	            
+	            EmployeeEntity employee = new EmployeeEntity(name, employeeEmail, password, cpf, role, admissionDate, status);
+	            employee.setId(id);
+	            
+	            return employee;
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }
