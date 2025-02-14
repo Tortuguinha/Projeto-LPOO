@@ -18,7 +18,7 @@ public class DatabaseConfig {
 			Properties prop = new Properties();
 			
 			if(input == null) {
-				System.out.println("Is not possible find database.properties");
+				System.out.println("Não foi possível encontrar o caminho para database.properties");
 			}
 			
 			prop.load(input);

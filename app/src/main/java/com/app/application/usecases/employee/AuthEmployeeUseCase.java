@@ -15,7 +15,7 @@ public class AuthEmployeeUseCase {
 		EmployeeEntity employeeData = this._employeeRepository.findByEmail(email);
 		
 		if(employeeData == null) {
-			throw new RuntimeException("Empregado sob " + email + " não existe.");
+			throw new RuntimeException("Funcionário " + email + " não existe.");
 		}
 		
 		if(!password.equals(employeeData.getPassword())) {
