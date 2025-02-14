@@ -1,0 +1,131 @@
+package app.view;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import app.model.User;
+import java.util.List;
+import java.util.ArrayList;
+
+public class LoginView extends JFrame {
+
+    private List<User> users;
+
+    public LoginView(List<User> users) {
+        this.users = users;
+
+        setTitle("Tela de Login");
+        setSize(600, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Componentes da interface
+        JLabel lblUsuario = new JLabel("Usuário:");
+        lblUsuario.setBounds(107, 91, 104, 34);
+        lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+        lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        JLabel lblSenha = new JLabel("Senha:");
+        lblSenha.setBounds(107, 166, 112, 38);
+        lblSenha.setHorizontalAlignment(SwingConstants.CENTER);
+        lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        JTextField txtUsuario = new JTextField();
+        txtUsuario.setBounds(189, 98, 231, 25);
+        txtUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+        JPasswordField txtSenha = new JPasswordField();
+        txtSenha.setBounds(189, 173, 231, 25);
+        txtSenha.setHorizontalAlignment(SwingConstants.CENTER);
+        txtSenha.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        JButton btnLogin = new JButton("Entrar");
+        btnLogin.setBounds(241, 239, 112, 34);
+        btnLogin.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String usuario = txtUsuario.getText();
+                char[] senhaChar = txtSenha.getPassword();
+                String senha = new String(senhaChar);
+
+                // Verificação de caracteres
+                if (usuario.matches(".*\\d.*")) {
+                    JOptionPane.showMessageDialog(null, "Nome de usuário não pode conter números.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    System.out.println("Nome de usuário não pode conter números.");
+                    return;
+                }
+
+                if (senha.length() >= 9) {
+                    JOptionPane.showMessageDialog(null, "Senha deve ter menos de 9 caracteres.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    System.out.println("Senha deve ter menos de 9 caracteres.");
+                    return;
+                }
+
+                // Lógica de login
+                boolean loginSuccess = false;
+                for (User user : users) {
+                    if (user.getUsername().equals(usuario) && user.getPassword().equals(senha)) {
+                        loginSuccess = true;
+                        break;
+                    }
+                }
+
+                if (loginSuccess) {
+                    JOptionPane.showMessageDialog(null, "Login bem-sucedido!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    System.out.println("Login bem-sucedido!");
+                    System.out.println("Usuário: " + usuario);
+                    System.out.println("Senha: " + senha);
+                    
+                    // Transição para a tela de dashboard
+                    DashboardView dashboardView = new DashboardView();
+                    dashboardView.setVisible(true);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Nome de usuário ou senha incorretos.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    System.out.println("Nome de usuário ou senha incorretos.");
+                }
+            }
+        });
+        btnLogin.setForeground(SystemColor.textHighlight);
+        btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        getContentPane().setLayout(null);
+
+        // Adicionando componentes à janela
+        getContentPane().add(lblUsuario);
+        getContentPane().add(txtUsuario);
+        getContentPane().add(lblSenha);
+        getContentPane().add(txtSenha);
+        JLabel label = new JLabel();
+        label.setBounds(0, 300, 129, 45);
+        getContentPane().add(label); // Espaço vazio
+        getContentPane().add(btnLogin);
+        JLabel label_1 = new JLabel();
+        label_1.setBounds(0, 345, 292, 115);
+        getContentPane().add(label_1); // Espaço vazio
+        
+        JLabel LabelTelaDeLogin = new JLabel("Tela De Login");
+        LabelTelaDeLogin.setHorizontalAlignment(SwingConstants.CENTER);
+        LabelTelaDeLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        LabelTelaDeLogin.setBounds(248, 34, 105, 29);
+        getContentPane().add(LabelTelaDeLogin);
+        
+        JButton btnEsqueceuSenha = new JButton("Esqueceu Senha");
+        btnEsqueceuSenha.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ResetPassword resetPassword = new ResetPassword(users);
+                resetPassword.setVisible(true);
+                dispose(); // Fecha a tela de login
+            }
+        });
+        btnEsqueceuSenha.setForeground(SystemColor.textHighlight);
+        btnEsqueceuSenha.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        btnEsqueceuSenha.setBounds(224, 284, 143, 34);
+        getContentPane().add(btnEsqueceuSenha);
+
+        setLocationRelativeTo(null); // Centraliza a janela
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        // Exemplo de usuários
+        List<User> users = new ArrayList<>();
+        users.add(new User("administrador", "12345687"));
+        
+        new LoginView(users).setVisible(true);
+    }
+}
