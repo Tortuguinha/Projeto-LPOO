@@ -10,13 +10,15 @@ import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.text.MaskFormatter;
 
 import com.app.domain.entities.employee.EmployeeAddressEntity;
 import com.app.domain.entities.employee.EmployeeContactEntity;
@@ -63,6 +65,8 @@ public class EmployeeRegisterView extends JFrame {
 	
 	private JButton cadastrarButton;
 	private JButton voltarButton;
+	
+	private MaskFormatter maskFormatter = null;
 	
 	private final IEmployeeController _employeeController;
 	private EmployeeEntity _loggedEmployee;
@@ -206,6 +210,56 @@ public class EmployeeRegisterView extends JFrame {
         cadastrarButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	
+            	if(nameField.getText().length() < 6 || nameField.getText().length() > 30 || nameField.getText().isEmpty()) {
+            		JOptionPane.showMessageDialog(null, "Coloque o Nome Completo", "Erro", JOptionPane.ERROR_MESSAGE);
+            		return;
+            	}
+            	
+            	if(nameField.getText().matches("\\d+")) {
+            		JOptionPane.showMessageDialog(null, "Nome contém caracteres inválidos", "Erro", JOptionPane.ERROR_MESSAGE);
+            		return;
+            	}
+            	
+            	if(cpfField.getText().length() < 11 || cpfField.getText().length() > 11) {
+            		JOptionPane.showMessageDialog(null, "CPF Inválido, insira o CPF", "Erro", JOptionPane.ERROR_MESSAGE);
+            		return;
+            	}
+
+            	if (!emailField.getText().matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
+            		JOptionPane.showMessageDialog(null, "Insira um e-mail válido", "Erro", JOptionPane.ERROR_MESSAGE);
+            		return;
+            	}
+            	
+            	if(new String(tempPwdField.getPassword()).length() < 6 || new String(tempPwdField.getPassword()).length() > 32) {
+            		JOptionPane.showMessageDialog(null, "Insira uma senha entre 6 e 32 caracteres", "Erro", JOptionPane.ERROR_MESSAGE);
+            		return;
+            	}
+            	
+            	if(telephoneField.getText().length() < 9 ||telephoneField.getText().length() > 9) {
+            		JOptionPane.showMessageDialog(null, "Número de telefone inválido", "Erro", JOptionPane.ERROR_MESSAGE);
+            		return;
+            	}
+            	
+            	if(numberField.getText().isEmpty()) {
+            		JOptionPane.showMessageDialog(null, "Insira o número do endereço", "Erro", JOptionPane.ERROR_MESSAGE);
+            		return;
+            	}
+            	
+            	if(streetField.getText().isEmpty()) {
+            		JOptionPane.showMessageDialog(null, "Insira a Rua", "Erro", JOptionPane.ERROR_MESSAGE);
+            		return;
+            	}
+            	
+            	if(districtField.getText().isEmpty()) {
+            		JOptionPane.showMessageDialog(null, "Insira o bairro", "Erro", JOptionPane.ERROR_MESSAGE);
+            		return;
+            	}
+            	
+            	if(cityField.getText().isEmpty()) {
+            		JOptionPane.showMessageDialog(null, "Insira a cidade", "Erro", JOptionPane.ERROR_MESSAGE);
+            		return;
+            	}
+            	
             	 EmployeeEntity employeeObject = new EmployeeEntity(
             		        nameField.getText(),
             		        emailField.getText(),
@@ -229,6 +283,7 @@ public class EmployeeRegisterView extends JFrame {
             			 );
             	 
             	handleEmployeeRegister(employeeObject, employeeContactObject, employeeAddressEntity);
+            	clearFields();
             }
         });
         getContentPane().add(cadastrarButton);
@@ -291,6 +346,19 @@ public class EmployeeRegisterView extends JFrame {
        
 	}
 
+	private void clearFields() {
+	    nameField.setText("");
+	    cpfField.setText("");
+	    tempPwdField.setText("");
+	    telephoneField.setText("");
+	    emailField.setText("");
+	    numberField.setText("");
+	    streetField.setText("");
+	    districtField.setText("");
+	    cityField.setText("");
+	    roleComboBox.setSelectedIndex(0);
+	}
+	
 	public void handleEmployeeRegister(EmployeeEntity employee, EmployeeContactEntity contact, EmployeeAddressEntity address) {
 		this._employeeController.register(employee, contact, address);
 	}
