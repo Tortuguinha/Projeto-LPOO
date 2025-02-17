@@ -327,6 +327,7 @@ public class EmployeeRegisterView extends JFrame {
         getContentPane().add(roleLabel);
         
         roleComboBox = new JComboBox<String>(roleOptions);        
+        roleComboBox.setForeground(SystemColor.textHighlight);
         roleComboBox.setFont(getFont());
         roleComboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
         roleComboBox.setBounds(549, 106, 161, 29);

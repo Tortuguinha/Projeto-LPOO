@@ -29,6 +29,8 @@ public class EmployeeInfoView extends JFrame {
 
         // Botão de voltar (opcional)
         JButton backButton = new JButton("Voltar");
+        backButton.setForeground(SystemColor.textHighlight);
+        backButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
         backButton.addActionListener(e -> {
             this.dispose(); // Fecha a tela de detalhes
             EmployeeManagementView managementView = new EmployeeManagementView();
