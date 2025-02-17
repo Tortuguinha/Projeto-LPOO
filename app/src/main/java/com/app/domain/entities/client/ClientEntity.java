@@ -7,9 +7,9 @@ public class ClientEntity {
     private String email;
     private String cpf;
     private String telephone;
-    private String status;
+    private Boolean status;
 
-    public ClientEntity(int id, String name, String email, String cpf, String telephone, String status) {
+    public ClientEntity(int id, String name, String email, String cpf, String telephone, boolean status) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -54,11 +54,11 @@ public class ClientEntity {
         this.telephone = telephone;
     }
 
-    public String getStatus() {
+    public Boolean getStatus() {
         return this.status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 }
