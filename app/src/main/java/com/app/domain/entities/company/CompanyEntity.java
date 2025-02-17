@@ -1,4 +1,4 @@
-package com.app.domain.entities;
+package com.app.domain.entities.company;
 
 public class CompanyEntity {
     private String companyName;
@@ -56,8 +56,4 @@ public class CompanyEntity {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return companyName + " - CNPJ: " + cnpj + " (Telefone: " + phone + ")";
-    }
 }

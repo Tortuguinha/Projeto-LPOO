@@ -6,7 +6,7 @@ import java.sql.Connection;
 import com.app.infrastructure.config.DatabaseConfig;
 import com.app.infrastructure.database.interfaces.IDatabaseInitializer;
 
-public class DatabaseInitializer implements IDatabaseInitializer {
+public class EmployeeDatabaseInitializer implements IDatabaseInitializer {
 	public void execute() {
 		try (Connection connection = DatabaseConfig.getConnection()) {
 			Statement query = connection.createStatement();

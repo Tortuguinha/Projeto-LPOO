@@ -2,7 +2,7 @@ package com.app;
 
 import java.awt.EventQueue;
 
-import com.app.infrastructure.database.DatabaseInitializer;
+import com.app.infrastructure.database.EmployeeDatabaseInitializer;
 import com.app.infrastructure.factories.EmployeeFactory;
 import com.app.presentation.views.auth.LoginView;
 import com.app.presentation.views.employee.EmployeeRegisterView;
@@ -10,8 +10,8 @@ import com.app.presentation.views.employee.EmployeeRegisterView;
 public class Main {
 	
     public static void main(String[] args) {
-    	// Database
-    	DatabaseInitializer databaseInit = new DatabaseInitializer();
+    	// Databases Initialize
+    	EmployeeDatabaseInitializer databaseInit = new EmployeeDatabaseInitializer();
     	
     	// Factories
     	final EmployeeFactory employeeFactory = new EmployeeFactory();

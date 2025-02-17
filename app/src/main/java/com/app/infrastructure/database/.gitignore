@@ -1,2 +1,5 @@
 /DatabaseInitializer.class
 /Database.class
+/EmployeeDatabaseInitializer.class
+/ClientDatabaseInitializer.class
+/CompanyDatabaseInitializer.class
