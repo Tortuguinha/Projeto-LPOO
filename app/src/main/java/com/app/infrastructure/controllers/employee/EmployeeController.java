@@ -1,7 +1,10 @@
 package com.app.infrastructure.controllers.employee;
 
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
+import com.app.application.usecases.employee.FindEmployeeByCPFUseCase;
 import com.app.domain.entities.employee.EmployeeAddressEntity;
 import com.app.domain.entities.employee.EmployeeContactEntity;
 import com.app.domain.entities.employee.EmployeeEntity;
@@ -11,9 +14,11 @@ import com.app.infrastructure.controllers.interfaces.IEmployeeController;
 public class EmployeeController implements IEmployeeController {
 	
 	private final EmployeeService _employeeServices;
+	private final FindEmployeeByCPFUseCase _findEmployeeByCPFUseCase;
 	
-	public EmployeeController(EmployeeService employeeServices) {
+	public EmployeeController(EmployeeService employeeServices, FindEmployeeByCPFUseCase  findEmployeeByCPFUseCase) {
 		this._employeeServices = employeeServices;
+		this._findEmployeeByCPFUseCase = findEmployeeByCPFUseCase;
 	}
 	
 	public void register(EmployeeEntity employee, EmployeeContactEntity contact, EmployeeAddressEntity address) {
@@ -34,5 +39,14 @@ public class EmployeeController implements IEmployeeController {
 		}
 		
 		return employeeData;
+	}
+	
+	public EmployeeEntity findEmployeeByCPF(String cpf) {
+		
+		return this._findEmployeeByCPFUseCase.execute(cpf);
+	}
+	
+	public List<EmployeeEntity> returnAllEmployees() {
+		return this._employeeServices.allEmployee();
 	}
 }

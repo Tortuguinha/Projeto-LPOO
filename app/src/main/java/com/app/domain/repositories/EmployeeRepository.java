@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.app.domain.entities.employee.EmployeeAddressEntity;
 import com.app.domain.entities.employee.EmployeeContactEntity;
@@ -82,15 +84,15 @@ public class EmployeeRepository implements IEmployeeRepository {
 			
 			if(resultSet.next()) {
 				int id = resultSet.getInt("id");
-	            String name = resultSet.getString("name");
+	            String employeeName = resultSet.getString("name");
 	            String employeeEmail = resultSet.getString("email");
-	            String password = resultSet.getString("password");
-	            String cpf = resultSet.getString("cpf");
-	            EmployeeEntity.ROLE role = EmployeeEntity.ROLE.valueOf(resultSet.getString("role"));
-	            Date admissionDate = resultSet.getDate("admission_date");
-	            Boolean status = resultSet.getBoolean("status");
+	            String employeePassword = resultSet.getString("password");
+	            String employeeCPF = resultSet.getString("cpf");
+	            EmployeeEntity.ROLE employeeRole = EmployeeEntity.ROLE.valueOf(resultSet.getString("role"));
+	            Date employeeAdmissionDate = resultSet.getDate("admission_date");
+	            Boolean employeeStatus = resultSet.getBoolean("status");
 	            
-	            EmployeeEntity employee = new EmployeeEntity(name, employeeEmail, password, cpf, role, admissionDate, status);
+	            EmployeeEntity employee = new EmployeeEntity(employeeName, employeeEmail, employeePassword, employeeCPF, employeeRole, employeeAdmissionDate, employeeStatus);
 	            employee.setId(id);
 	            
 	            return employee;
@@ -102,5 +104,73 @@ public class EmployeeRepository implements IEmployeeRepository {
 		}
 		
 		return null;
+	}
+	
+	
+	public EmployeeEntity findByCPF(String cpf) {
+	
+		String sql = "SELECT id, name, email, password, cpf, role, admission_date, status FROM employee WHERE cpf = ?";
+		
+		try(Connection connection = DatabaseConfig.getConnection()) {
+			
+			PreparedStatement query = connection.prepareStatement(sql);
+			query.setString(1, cpf);
+			
+			ResultSet resultSet = query.executeQuery();
+			
+			if(resultSet.next()) {
+				int id = resultSet.getInt("id");
+	            String employeeName = resultSet.getString("name");
+	            String employeeEmail = resultSet.getString("email");
+	            String employeePassword = resultSet.getString("password");
+	            String employeeCPF = resultSet.getString("cpf");
+	            EmployeeEntity.ROLE employeeRole = EmployeeEntity.ROLE.valueOf(resultSet.getString("role"));
+	            Date employeeAdmissionDate = resultSet.getDate("admission_date");
+	            Boolean employeeStatus = resultSet.getBoolean("status");
+	            
+	            EmployeeEntity employee = new EmployeeEntity(employeeName, employeeEmail, employeePassword, employeeCPF, employeeRole, employeeAdmissionDate, employeeStatus);
+	            employee.setId(id);
+	            
+	            return employee;
+			}
+			
+		} catch (Exception e) {
+			
+		}
+		
+		return null;
+	}
+	
+	public List<EmployeeEntity> allEmployee() {
+		
+		String sql = "SELECT id, name, email, password, cpf, role, admission_date, status FROM employee";
+		List<EmployeeEntity> employees = new ArrayList<EmployeeEntity>();
+		
+		try (Connection connection = DatabaseConfig.getConnection()) {
+			PreparedStatement query = connection.prepareStatement(sql);
+			
+			ResultSet res = query.executeQuery();
+			
+			while(res.next()) {
+				int id = res.getInt("id");
+	            String name = res.getString("name");
+	            String email = res.getString("email");
+	            String password = res.getString("password");
+	            String cpf = res.getString("cpf");
+	            EmployeeEntity.ROLE role = EmployeeEntity.ROLE.valueOf(res.getString("role"));
+	            Date admissionDate = res.getDate("admission_date");
+	            Boolean status = res.getBoolean("status");
+
+	            EmployeeEntity employee = new EmployeeEntity(name, email, password, cpf, role, admissionDate, status);
+	            employee.setId(id);
+	            employees.add(employee); 
+			}
+		
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return employees;
 	}
 }

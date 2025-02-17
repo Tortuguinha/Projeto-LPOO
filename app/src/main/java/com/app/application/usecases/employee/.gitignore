@@ -1,2 +1,4 @@
 /RegisterEmployeeUseCase.class
 /AuthEmployeeUseCase.class
+/ReturnEmployeesUseCase.class
+/FindEmployeeByCPFUseCase.class

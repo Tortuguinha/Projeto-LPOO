@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.app.domain.entities.employee.EmployeeEntity;
+import com.app.domain.entities.employee.EmployeeEntity.ROLE;
 import com.app.infrastructure.controllers.interfaces.IEmployeeController;
 import com.app.presentation.views.client.ClientManagementView;
 import com.app.presentation.views.client.ClientRegisterView;
@@ -94,7 +95,7 @@ public class DashboardView extends JFrame {
         btnFuncionarios = new JButton("Lista de Funcionários");
         btnFuncionarios.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		EmployeeManagementView employeeManagement = new EmployeeManagementView();
+        		EmployeeManagementView employeeManagement = new EmployeeManagementView(_loggedEmployee, _employeeController);
         		employeeManagement.setVisible(true);
         		dispose();
         	}
@@ -154,10 +155,26 @@ public class DashboardView extends JFrame {
         lblPresentation.setBounds(574, 31, 150, 14);
         contentPane.add(lblPresentation);
         
-        this.employeeLayer();
-        this.clientsLayer();
-        this.serViceOrderLayer();
-        this.budgetLayer();
-        this.supportLayer();
+        switch (_loggedEmployee.getRole()) {
+			case ADMINISTRADOR: {
+				this.employeeLayer();
+	            this.clientsLayer();
+	            this.serViceOrderLayer();
+	            this.budgetLayer();
+	            this.supportLayer();
+			}
+			case ATENDENTE: {
+	            this.clientsLayer();
+	            this.serViceOrderLayer();
+	            this.budgetLayer();
+	            this.supportLayer();
+			}
+			case TECNICO: {
+	            this.budgetLayer();
+	            this.supportLayer();
+			}
+		}
+        
+        
 	}
 }

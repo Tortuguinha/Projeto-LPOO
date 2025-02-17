@@ -10,7 +10,6 @@ import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,7 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.text.MaskFormatter;
 
 import com.app.domain.entities.employee.EmployeeAddressEntity;
 import com.app.domain.entities.employee.EmployeeContactEntity;
@@ -65,8 +63,6 @@ public class EmployeeRegisterView extends JFrame {
 	
 	private JButton cadastrarButton;
 	private JButton voltarButton;
-	
-	private MaskFormatter maskFormatter = null;
 	
 	private final IEmployeeController _employeeController;
 	private EmployeeEntity _loggedEmployee;

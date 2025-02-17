@@ -33,6 +33,9 @@ public class EmployeeEntity {
 	/* --------------------------------------- */
 	/* -------------- Getters ---------------- */
 	/* --------------------------------------- */
+	public Integer getId() {
+		return this.getId();
+	}
 	
 	public String getName() {
 		return this.Name;

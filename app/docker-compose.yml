@@ -9,21 +9,8 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - meu-network
-
-  app:
-    build: .
-    container_name: app
-    depends_on:
-      - mysql
-    environment:
-      - DISPLAY=${DISPLAY}
-    networks:
-      - network-app
-    volumes:
-      - .:/app
-    network_mode: "host"
+      - db-network
 
 networks:
-  meu-network:
+  db-network:
     driver: bridge
