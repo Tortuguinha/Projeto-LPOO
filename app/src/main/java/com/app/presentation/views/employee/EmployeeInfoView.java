@@ -62,7 +62,6 @@ public class EmployeeInfoView extends JFrame {
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
-<<<<<<< HEAD
         contentPane.setLayout(null);
         
         JLabel dataLabel = new JLabel("Dados");
@@ -190,24 +189,9 @@ public class EmployeeInfoView extends JFrame {
             this.dispose();
             EmployeeManagementView managementView = new EmployeeManagementView(this._loggedEmployee, this._employeeController);
             managementView.setVisible(true);
-=======
-        contentPane.setLayout(new BorderLayout());
 
-        // Exemplo de exibição dos detalhes do funcionário
-        JLabel detailsLabel = new JLabel("Detalhes do Funcionário com Matrícula: " + employeeId, SwingConstants.CENTER);
-        detailsLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        contentPane.add(detailsLabel, BorderLayout.CENTER);
-
-        // Botão de voltar (opcional)
-        JButton backButton = new JButton("Voltar");
-        backButton.setForeground(SystemColor.textHighlight);
-        backButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        backButton.addActionListener(e -> {
-            this.dispose(); // Fecha a tela de detalhes
-            EmployeeManagementView managementView = new EmployeeManagementView();
-            managementView.setVisible(true); // Reabre a tela de gerenciamento
->>>>>>> 794d31487fd3dbee6c53054f58f79d7f889f2d84
         });
         contentPane.add(backScreenBtn);
+        contentPane.setLayout(new BorderLayout());
     }
 }

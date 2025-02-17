@@ -106,19 +106,16 @@ public class DashboardView extends JFrame {
         btnFuncionarios.setForeground(SystemColor.textHighlight);
         btnFuncionarios.setFont(new Font("Tahoma", Font.PLAIN, 13));
         btnFuncionarios.addActionListener(new ActionListener() {
-<<<<<<< HEAD
-        	public void actionPerformed(ActionEvent e) {
+        	public void actionPerformed1(ActionEvent e) {
         		EmployeeManagementView employeeManagement = new EmployeeManagementView(_loggedEmployee, _employeeController);
         		employeeManagement.setVisible(true);
         		dispose();
         	}
-=======
             public void actionPerformed(ActionEvent e) {
-                EmployeeManagementView employeeManagement = new EmployeeManagementView();
+                EmployeeManagementView employeeManagement = new EmployeeManagementView(_loggedEmployee, _employeeController);
                 employeeManagement.setVisible(true);
                 dispose();
             }
->>>>>>> 794d31487fd3dbee6c53054f58f79d7f889f2d84
         });
         btnFuncionarios.setBounds(54, 191, 160, 39);
         contentPane.add(btnFuncionarios);
@@ -189,7 +186,6 @@ public class DashboardView extends JFrame {
         lblPresentation.setBounds(574, 31, 150, 14);
         contentPane.add(lblPresentation);
         
-<<<<<<< HEAD
         switch (_loggedEmployee.getRole()) {
 			case ADMINISTRADOR: {
 				this.employeeLayer();
@@ -210,14 +206,10 @@ public class DashboardView extends JFrame {
 			}
 		}
         
-        
-	}
-=======
         this.employeeLayer();
         this.clientsLayer();
         this.serViceOrderLayer();
         this.budgetLayer();
         this.supportLayer();
     }
->>>>>>> 794d31487fd3dbee6c53054f58f79d7f889f2d84
 }
