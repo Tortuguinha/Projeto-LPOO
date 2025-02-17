@@ -43,19 +43,19 @@ public class LoginView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Componentes da interface
-        JLabel lblUsuario = new JLabel("Usuário:");
-        lblUsuario.setBounds(107, 91, 104, 34);
+        JLabel lblUsuario = new JLabel("Email");
+        lblUsuario.setBounds(241, 74, 104, 34);
         lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
         lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        JLabel lblSenha = new JLabel("Senha:");
-        lblSenha.setBounds(107, 166, 112, 38);
+        JLabel lblSenha = new JLabel("Senha");
+        lblSenha.setBounds(241, 158, 112, 38);
         lblSenha.setHorizontalAlignment(SwingConstants.CENTER);
         lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 15));
         JTextField emailField = new JTextField();
-        emailField.setBounds(189, 98, 231, 25);
+        emailField.setBounds(189, 114, 231, 25);
         emailField.setHorizontalAlignment(SwingConstants.CENTER);
         JPasswordField pwdField = new JPasswordField();
-        pwdField.setBounds(189, 173, 231, 25);
+        pwdField.setBounds(189, 196, 231, 25);
         pwdField.setHorizontalAlignment(SwingConstants.CENTER);
         pwdField.setFont(new Font("Tahoma", Font.PLAIN, 15));
         JButton btnLogin = new JButton("Entrar");

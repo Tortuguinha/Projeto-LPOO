@@ -9,61 +9,39 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
+
+import com.app.infrastructure.controllers.interfaces.IEmployeeController;
+import com.app.presentation.views.employee.EmployeeRegisterView;
 
 public class RecoveryPwdView extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	
-	JTextField usuarioField;
-	JTextField novoUsuarioField;
-	JPasswordField novaSenhaField;
-	JPasswordField confirmarSenhaField;
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    
+    JTextField usuarioField;
+    private final IEmployeeController _employeeController;
+    private final EmployeeRegisterView _employeeRegisterView;
 
-
-	public RecoveryPwdView() {
-		setTitle("Recuperação de Senha");
+    public RecoveryPwdView(IEmployeeController employeeController, EmployeeRegisterView employeeRegisterView) {
+        this._employeeController = employeeController;
+        this._employeeRegisterView = employeeRegisterView;
+        
+        setTitle("Recuperação de Senha");
         setSize(600, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JLabel usuarioLabel = new JLabel("Usuário Atual:");
-        usuarioLabel.setBounds(31, 76, 120, 25);
+        JLabel usuarioLabel = new JLabel("Digite Seu E-mail");
+        usuarioLabel.setBounds(211, 113, 130, 25);
         usuarioLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
         usuarioField = new JTextField();
-        usuarioField.setBounds(132, 77, 200, 25);
+        usuarioField.setBounds(133, 161, 303, 30);
         usuarioField.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
-        JLabel novoUsuarioLabel = new JLabel("Novo Usuário:");
-        novoUsuarioLabel.setBounds(31, 125, 120, 25);
-        novoUsuarioLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-
-        novoUsuarioField = new JTextField();
-        novoUsuarioField.setBounds(132, 126, 200, 25);
-        novoUsuarioField.setFont(new Font("Tahoma", Font.PLAIN, 13));
-
-        JLabel novaSenhaLabel = new JLabel("Nova Senha:");
-        novaSenhaLabel.setBounds(31, 179, 120, 25);
-        novaSenhaLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-
-        novaSenhaField = new JPasswordField();
-        novaSenhaField.setBounds(132, 180, 200, 25);
-        novaSenhaField.setFont(new Font("Tahoma", Font.PLAIN, 13));
-
-        JLabel confirmarSenhaLabel = new JLabel("Confirmar Senha:");
-        confirmarSenhaLabel.setBounds(10, 230, 150, 25);
-        confirmarSenhaLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-
-        confirmarSenhaField = new JPasswordField();
-        confirmarSenhaField.setBounds(132, 231, 200, 25);
-        confirmarSenhaField.setFont(new Font("Tahoma", Font.PLAIN, 13));
-
-        JButton btnAtualizar = new JButton("Atualizar");
-        btnAtualizar.setBounds(280, 291, 200, 30);
+        JButton btnAtualizar = new JButton("Pedido de Recuperação");
+        btnAtualizar.setBounds(182, 202, 194, 30);
         btnAtualizar.setForeground(SystemColor.textHighlight);
         btnAtualizar.setFont(new Font("Tahoma", Font.PLAIN, 15));
         btnAtualizar.addActionListener(new ActionListener() {
@@ -71,17 +49,28 @@ public class RecoveryPwdView extends JFrame {
               
             }
         });
-
         getContentPane().setLayout(null);
         getContentPane().add(usuarioLabel);
         getContentPane().add(usuarioField);
-        getContentPane().add(novoUsuarioLabel);
-        getContentPane().add(novoUsuarioField);
-        getContentPane().add(novaSenhaLabel);
-        getContentPane().add(novaSenhaField);
-        getContentPane().add(confirmarSenhaLabel);
-        getContentPane().add(confirmarSenhaField);
         getContentPane().add(btnAtualizar);
-	}
-
+        
+        JLabel lblTitulo = new JLabel("Recuperar Senha");
+        lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblTitulo.setBounds(211, 47, 130, 30);
+        getContentPane().add(lblTitulo);
+        
+        JButton btnNewButton = new JButton("Voltar tela Inical");
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();   
+                // Abre a tela de login
+                LoginView loginView = new LoginView(_employeeController, _employeeRegisterView);
+                loginView.setVisible(true); 
+            }
+        });
+        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        btnNewButton.setForeground(SystemColor.textHighlight);
+        btnNewButton.setBounds(211, 253, 130, 25);
+        getContentPane().add(btnNewButton);
+    }
 }
