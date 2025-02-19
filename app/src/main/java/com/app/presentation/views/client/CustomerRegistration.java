@@ -1,28 +1,40 @@
 package com.app.presentation.views.client;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import com.app.presentation.views.DashboardView;
 import java.awt.Font;
 import java.awt.SystemColor;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.regex.Pattern;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import com.app.domain.entities.employee.EmployeeEntity;
+import com.app.presentation.views.DashboardView;
 
 public class CustomerRegistration {
 
-    private JFrame frmCadrastroCliente;
+    private JFrame frmCadastroDePessoa;
+    private JTextField CampoNomeDeEmpresa;
+    private JTextField CampoCNPJ;
+    private JTextField CampoTelefone;
+    private JTextField CampoEmail;
+    private JTextField CampoCidade;
+    private JTextField CampoRua;
+    private JTextField CampoComplemento;
+    private JTextField CampoBairro;
 
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    CustomerRegistration window = new CustomerRegistration();
-                    window.frmCadrastroCliente.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        EventQueue.invokeLater(() -> {
+            try {
+                CustomerRegistration window = new CustomerRegistration();
+                window.frmCadastroDePessoa.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }
@@ -32,55 +44,67 @@ public class CustomerRegistration {
     }
 
     private void initialize() {
-        frmCadrastroCliente = new JFrame();
-        frmCadrastroCliente.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 14));
-        frmCadrastroCliente.setTitle("Cadastro Cliente");
-        frmCadrastroCliente.setBounds(100, 100, 600, 500);
-        frmCadrastroCliente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frmCadrastroCliente.getContentPane().setLayout(null);
-        
-        JLabel lblLabelCadrastrar = new JLabel("O Que Pretende Cadastrar?");
-        lblLabelCadrastrar.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblLabelCadrastrar.setBounds(178, 88, 199, 40);
-        frmCadrastroCliente.getContentPane().add(lblLabelCadrastrar);
-        
-        JButton btnPessoaJuridicaCNPJ = new JButton("Pessoa Juridica(CNPJ)");
-        btnPessoaJuridicaCNPJ.addActionListener(new ActionListener() {
+        frmCadastroDePessoa = new JFrame();
+        frmCadastroDePessoa.setTitle("Cadastro de Pessoa Jurídica (CNPJ)");
+        frmCadastroDePessoa.setBounds(100, 100, 701, 520);
+        frmCadastroDePessoa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmCadastroDePessoa.getContentPane().setLayout(null);
+
+        JLabel lblNomeDeEmpresa = new JLabel("Nome De Empresa");
+        lblNomeDeEmpresa.setForeground(SystemColor.textHighlight);
+        lblNomeDeEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        lblNomeDeEmpresa.setBounds(44, 77, 119, 27);
+        frmCadastroDePessoa.getContentPane().add(lblNomeDeEmpresa);
+
+        CampoNomeDeEmpresa = new JTextField();
+        CampoNomeDeEmpresa.setBounds(44, 102, 218, 20);
+        frmCadastroDePessoa.getContentPane().add(CampoNomeDeEmpresa);
+
+        JLabel lblCnpj = new JLabel("CNPJ");
+        lblCnpj.setForeground(SystemColor.textHighlight);
+        lblCnpj.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        lblCnpj.setBounds(44, 133, 39, 27);
+        frmCadastroDePessoa.getContentPane().add(lblCnpj);
+
+        CampoCNPJ = new JTextField();
+        CampoCNPJ.setBounds(44, 153, 218, 20);
+        frmCadastroDePessoa.getContentPane().add(CampoCNPJ);
+
+        JButton btnCadastraEmpresa = new JButton("Cadastrar Empresa");
+        btnCadastraEmpresa.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                CompanyRegistrationCNPJ companyRegistration = new CompanyRegistrationCNPJ();
-                companyRegistration.main(null);
-                frmCadrastroCliente.dispose();
+                String cnpj = CampoCNPJ.getText();
+
+                if (!isValidCNPJ(cnpj)) {
+                    JOptionPane.showMessageDialog(frmCadastroDePessoa, "CNPJ inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                JOptionPane.showMessageDialog(frmCadastroDePessoa, "Empresa cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             }
         });
-        btnPessoaJuridicaCNPJ.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        btnPessoaJuridicaCNPJ.setForeground(SystemColor.textHighlight);
-        btnPessoaJuridicaCNPJ.setBounds(178, 160, 199, 45);
-        frmCadrastroCliente.getContentPane().add(btnPessoaJuridicaCNPJ);
-        
-        JButton btnPessoaFisicacpf = new JButton("Pessoa Fisica(CPF)");
-        btnPessoaFisicacpf.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                IndividualTaxpayerRegistration individualTaxpayerRegistration = new IndividualTaxpayerRegistration();
-                individualTaxpayerRegistration.main(null);
-                frmCadrastroCliente.dispose();
-            }
+        btnCadastraEmpresa.setBounds(466, 246, 165, 27);
+        frmCadastroDePessoa.getContentPane().add(btnCadastraEmpresa);
+
+        JButton btnVoltar = new JButton("Voltar");
+        btnVoltar.addActionListener(e -> {
+            DashboardView dashboardView = new DashboardView(new EmployeeEntity(), null); // Passe os parâmetros corretos
+            dashboardView.setVisible(true);
+            frmCadastroDePessoa.dispose();
         });
-        btnPessoaFisicacpf.setForeground(SystemColor.textHighlight);
-        btnPessoaFisicacpf.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        btnPessoaFisicacpf.setBounds(178, 227, 199, 45);
-        frmCadrastroCliente.getContentPane().add(btnPessoaFisicacpf);
-        
-        JButton btnNewButton = new JButton("Voltar");
-        btnNewButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                DashboardView dashboardView = new DashboardView(null, null); // Passe os parâmetros necessários
-                dashboardView.setVisible(true);
-                frmCadrastroCliente.dispose();
-            }
-        });
-        btnNewButton.setForeground(SystemColor.textHighlight);
-        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        btnNewButton.setBounds(229, 293, 97, 34);
-        frmCadrastroCliente.getContentPane().add(btnNewButton);
+        btnVoltar.setBounds(481, 303, 138, 27);
+        frmCadastroDePessoa.getContentPane().add(btnVoltar);
+    }
+
+    protected boolean isValidCNPJ(String cnpj) {
+        // Implementação da validação de CNPJ
+        String CNPJ_PATTERN = "\\d{14}";
+        return Pattern.matches(CNPJ_PATTERN, cnpj);
+    }
+
+    public void setVisible(boolean b) {
+        if (frmCadastroDePessoa != null) {
+            frmCadastroDePessoa.setVisible(b);
+        }
     }
 }

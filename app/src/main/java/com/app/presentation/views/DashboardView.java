@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.app.domain.entities.employee.EmployeeEntity;
-import com.app.domain.entities.employee.EmployeeEntity.ROLE;
 import com.app.infrastructure.controllers.interfaces.IEmployeeController;
 import com.app.presentation.views.client.ClientManagementView;
 import com.app.presentation.views.client.CustomerRegistration;
@@ -106,7 +105,8 @@ public class DashboardView extends JFrame {
         btnFuncionarios.setForeground(SystemColor.textHighlight);
         btnFuncionarios.setFont(new Font("Tahoma", Font.PLAIN, 13));
         btnFuncionarios.addActionListener(new ActionListener() {
-        	public void actionPerformed1(ActionEvent e) {
+        	@SuppressWarnings("unused")
+			public void actionPerformed1(ActionEvent e) {
         		EmployeeManagementView employeeManagement = new EmployeeManagementView(_loggedEmployee, _employeeController);
         		employeeManagement.setVisible(true);
         		dispose();
@@ -128,12 +128,20 @@ public class DashboardView extends JFrame {
         contentPane.add(lblOrdemDeServico);
         
         btnCadastroDeOs = new JButton("Cadastro de O.S");
+        btnCadastroDeOs.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         btnCadastroDeOs.setForeground(SystemColor.textHighlight);
         btnCadastroDeOs.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnCadastroDeOs.setBounds(522, 322, 160, 39);
         contentPane.add(btnCadastroDeOs);
         
         btnListaDeOs = new JButton("Lista de O.S");
+        btnListaDeOs.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         btnListaDeOs.setForeground(SystemColor.textHighlight);
         btnListaDeOs.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnListaDeOs.setBounds(522, 372, 160, 39);
@@ -147,12 +155,21 @@ public class DashboardView extends JFrame {
         contentPane.add(lblOrcamento);
         
         btnSolicitarOramento = new JButton("Solicitar Orçamento");
+        btnSolicitarOramento.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	
+        	}
+        });
         btnSolicitarOramento.setForeground(SystemColor.textHighlight);
         btnSolicitarOramento.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnSolicitarOramento.setBounds(522, 141, 160, 39);
         contentPane.add(btnSolicitarOramento);
         
         btnLista = new JButton("Lista de Orçamento");
+        btnLista.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         btnLista.setForeground(SystemColor.textHighlight);
         btnLista.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnLista.setBounds(522, 191, 160, 39);

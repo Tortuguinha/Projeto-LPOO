@@ -1,38 +1,26 @@
 package com.app.presentation.views.client;
 
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.SystemColor;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JOptionPane;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
+import javax.swing.*;
 
 public class CompanyRegistrationCNPJ {
 
-    private JFrame frmCadastroDePessoa;
-    private JTextField CampoNomeDeEmpresa;
-    private JTextField CampoCNPJ;
-    private JTextField CampoTelefone;
-    private JTextField CampoEmail;
-    private JTextField CampoCidade;
-    private JTextField CampoRua;
-    private JTextField CampoComplemento;
-    private JTextField CampoBairro;
+    private JFrame frmCadastroDeEmpresa;
+    private JTextField campoNomeEmpresa, campoCNPJ, campoTelefone, campoEmail, campoCidade, campoRua, campoComplemento, campoBairro, campoEquipamento;
+    private DefaultListModel<String> listaEquipamentosModel;
+    private JList<String> listaEquipamentos;
 
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    CompanyRegistrationCNPJ window = new CompanyRegistrationCNPJ();
-                    window.frmCadastroDePessoa.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        EventQueue.invokeLater(() -> {
+            try {
+                CompanyRegistrationCNPJ window = new CompanyRegistrationCNPJ();
+                window.frmCadastroDeEmpresa.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }
@@ -42,169 +30,139 @@ public class CompanyRegistrationCNPJ {
     }
 
     private void initialize() {
-        frmCadastroDePessoa = new JFrame();
-        frmCadastroDePessoa.setTitle("Cadastro de Pessoa Jurídica (CNPJ)");
-        frmCadastroDePessoa.setBounds(100, 100, 701, 520);
-        frmCadastroDePessoa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frmCadastroDePessoa.getContentPane().setLayout(null);
+        frmCadastroDeEmpresa = new JFrame();
+        frmCadastroDeEmpresa.setTitle("Cadastro de Empresa");
+        frmCadastroDeEmpresa.setBounds(100, 100, 750, 550);
+        frmCadastroDeEmpresa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmCadastroDeEmpresa.getContentPane().setLayout(null);
 
-        JLabel lblDados = new JLabel("Dados");
-        lblDados.setForeground(SystemColor.desktop);
-        lblDados.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblDados.setBounds(44, 21, 51, 36);
-        frmCadastroDePessoa.getContentPane().add(lblDados);
+        JLabel lblDados = new JLabel("Dados da Empresa");
+        lblDados.setBounds(44, 20, 150, 30);
+        lblDados.setFont(new Font("Tahoma", Font.BOLD, 14));
+        frmCadastroDeEmpresa.getContentPane().add(lblDados);
 
-        JLabel lblNomeDeEmpresa = new JLabel("Nome De Empresa");
-        lblNomeDeEmpresa.setForeground(SystemColor.textHighlight);
-        lblNomeDeEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblNomeDeEmpresa.setBounds(44, 77, 119, 27);
-        frmCadastroDePessoa.getContentPane().add(lblNomeDeEmpresa);
+        JLabel lblNomeEmpresa = new JLabel("Nome da Empresa:");
+        lblNomeEmpresa.setBounds(44, 60, 150, 25);
+        lblNomeEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        frmCadastroDeEmpresa.getContentPane().add(lblNomeEmpresa);
 
-        CampoNomeDeEmpresa = new JTextField();
-        CampoNomeDeEmpresa.setBounds(44, 102, 218, 20);
-        frmCadastroDePessoa.getContentPane().add(CampoNomeDeEmpresa);
-        CampoNomeDeEmpresa.setColumns(10);
+        campoNomeEmpresa = new JTextField();
+        campoNomeEmpresa.setBounds(44, 85, 250, 25);
+        frmCadastroDeEmpresa.getContentPane().add(campoNomeEmpresa);
 
-        JLabel lblCnpj = new JLabel("CNPJ");
-        lblCnpj.setForeground(SystemColor.textHighlight);
-        lblCnpj.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblCnpj.setBounds(44, 133, 39, 27);
-        frmCadastroDePessoa.getContentPane().add(lblCnpj);
+        JLabel lblCNPJ = new JLabel("CNPJ:");
+        lblCNPJ.setBounds(44, 120, 150, 25);
+        lblCNPJ.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        frmCadastroDeEmpresa.getContentPane().add(lblCNPJ);
 
-        CampoCNPJ = new JTextField();
-        CampoCNPJ.setColumns(10);
-        CampoCNPJ.setBounds(44, 153, 218, 20);
-        frmCadastroDePessoa.getContentPane().add(CampoCNPJ);
+        campoCNPJ = new JTextField();
+        campoCNPJ.setBounds(44, 145, 250, 25);
+        frmCadastroDeEmpresa.getContentPane().add(campoCNPJ);
 
-        JLabel lblContato = new JLabel("Contato");
-        lblContato.setForeground(SystemColor.desktop);
-        lblContato.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblContato.setBounds(44, 208, 119, 27);
-        frmCadastroDePessoa.getContentPane().add(lblContato);
-
-        JLabel lblTelefone = new JLabel("Telefone/Celular");
-        lblTelefone.setForeground(SystemColor.textHighlight);
+        JLabel lblTelefone = new JLabel("Telefone:");
         lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblTelefone.setBounds(44, 246, 119, 27);
-        frmCadastroDePessoa.getContentPane().add(lblTelefone);
+        lblTelefone.setBounds(44, 180, 150, 25);
+        frmCadastroDeEmpresa.getContentPane().add(lblTelefone);
 
-        CampoTelefone = new JTextField();
-        CampoTelefone.setColumns(10);
-        CampoTelefone.setBounds(44, 267, 218, 20);
-        frmCadastroDePessoa.getContentPane().add(CampoTelefone);
+        campoTelefone = new JTextField();
+        campoTelefone.setBounds(44, 205, 250, 25);
+        frmCadastroDeEmpresa.getContentPane().add(campoTelefone);
 
-        JLabel lblEmail = new JLabel("Email");
-        lblEmail.setForeground(SystemColor.textHighlight);
+        JLabel lblEmail = new JLabel("Email:");
         lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblEmail.setBounds(44, 303, 39, 27);
-        frmCadastroDePessoa.getContentPane().add(lblEmail);
+        lblEmail.setBounds(44, 240, 150, 25);
+        frmCadastroDeEmpresa.getContentPane().add(lblEmail);
 
-        CampoEmail = new JTextField();
-        CampoEmail.setColumns(10);
-        CampoEmail.setBounds(44, 325, 218, 20);
-        frmCadastroDePessoa.getContentPane().add(CampoEmail);
+        campoEmail = new JTextField();
+        campoEmail.setBounds(44, 265, 250, 25);
+        frmCadastroDeEmpresa.getContentPane().add(campoEmail);
 
         JLabel lblEndereco = new JLabel("Endereço");
-        lblEndereco.setForeground(SystemColor.desktop);
-        lblEndereco.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblEndereco.setBounds(359, 21, 66, 36);
-        frmCadastroDePessoa.getContentPane().add(lblEndereco);
+        lblEndereco.setBounds(350, 20, 100, 30);
+        lblEndereco.setFont(new Font("Tahoma", Font.BOLD, 14));
+        frmCadastroDeEmpresa.getContentPane().add(lblEndereco);
 
-        JLabel lblCidade = new JLabel("Cidade");
-        lblCidade.setForeground(SystemColor.textHighlight);
+        JLabel lblCidade = new JLabel("Cidade:");
+        lblCidade.setBounds(350, 60, 150, 25);
         lblCidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblCidade.setBounds(359, 80, 57, 20);
-        frmCadastroDePessoa.getContentPane().add(lblCidade);
+        frmCadastroDeEmpresa.getContentPane().add(lblCidade);
 
-        JLabel lblRua = new JLabel("Rua");
-        lblRua.setForeground(SystemColor.textHighlight);
+        campoCidade = new JTextField();
+        campoCidade.setBounds(350, 85, 250, 25);
+        frmCadastroDeEmpresa.getContentPane().add(campoCidade);
+
+        JLabel lblRua = new JLabel("Rua:");
+        lblRua.setBounds(350, 120, 150, 25);
         lblRua.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblRua.setBounds(359, 133, 39, 27);
-        frmCadastroDePessoa.getContentPane().add(lblRua);
+        frmCadastroDeEmpresa.getContentPane().add(lblRua);
 
-        CampoCidade = new JTextField();
-        CampoCidade.setColumns(10);
-        CampoCidade.setBounds(359, 102, 119, 20);
-        frmCadastroDePessoa.getContentPane().add(CampoCidade);
+        campoRua = new JTextField();
+        campoRua.setBounds(350, 145, 250, 25);
+        frmCadastroDeEmpresa.getContentPane().add(campoRua);
 
-        CampoRua = new JTextField();
-        CampoRua.setColumns(10);
-        CampoRua.setBounds(359, 153, 119, 20);
-        frmCadastroDePessoa.getContentPane().add(CampoRua);
-
-        JLabel lblComplemento = new JLabel("Complemento");
-        lblComplemento.setForeground(SystemColor.textHighlight);
-        lblComplemento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblComplemento.setBounds(512, 133, 119, 27);
-        frmCadastroDePessoa.getContentPane().add(lblComplemento);
-
-        JLabel lblBairro = new JLabel("Bairro");
-        lblBairro.setForeground(SystemColor.textHighlight);
+        JLabel lblBairro = new JLabel("Bairro:");
+        lblBairro.setBounds(350, 180, 150, 25);
         lblBairro.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblBairro.setBounds(512, 77, 51, 27);
-        frmCadastroDePessoa.getContentPane().add(lblBairro);
+        frmCadastroDeEmpresa.getContentPane().add(lblBairro);
 
-        CampoBairro = new JTextField();
-        CampoBairro.setColumns(10);
-        CampoBairro.setBounds(512, 102, 119, 20);
-        frmCadastroDePessoa.getContentPane().add(CampoBairro);
+        campoBairro = new JTextField();
+        campoBairro.setBounds(350, 205, 250, 25);
+        frmCadastroDeEmpresa.getContentPane().add(campoBairro);
 
-        CampoComplemento = new JTextField();
-        CampoComplemento.setColumns(10);
-        CampoComplemento.setBounds(512, 153, 119, 20);
-        frmCadastroDePessoa.getContentPane().add(CampoComplemento);
+        JLabel lblEquipamentos = new JLabel("Equipamentos:");
+        lblEquipamentos.setBounds(44, 300, 150, 25);
+        frmCadastroDeEmpresa.getContentPane().add(lblEquipamentos);
 
-        JButton btnCadastraEmpresa = new JButton("Cadastra Empresa");
-        btnCadastraEmpresa.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String nomeEmpresa = CampoNomeDeEmpresa.getText();
-                String cnpj = CampoCNPJ.getText();
-                String telefone = CampoTelefone.getText();
-                String email = CampoEmail.getText();
-                String cidade = CampoCidade.getText();
-                String rua = CampoRua.getText();
-                String bairro = CampoBairro.getText();
-                String complemento = CampoComplemento.getText();
+        campoEquipamento = new JTextField();
+        campoEquipamento.setBounds(44, 325, 250, 25);
+        frmCadastroDeEmpresa.getContentPane().add(campoEquipamento);
 
-                // Validação de CNPJ (apenas números)
-                if (!cnpj.matches("\\d{14}")) {
-                    JOptionPane.showMessageDialog(null, "CNPJ deve conter apenas 14 dígitos numéricos.", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+        JButton btnAdicionarEquipamento = new JButton("Adicionar");
+        btnAdicionarEquipamento.setBounds(299, 325, 100, 25);
+        btnAdicionarEquipamento.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        btnAdicionarEquipamento.setForeground(SystemColor.textHighlight);
+        frmCadastroDeEmpresa.getContentPane().add(btnAdicionarEquipamento);
 
-                // Validação de Email
-                if (!isValidEmail(email)) {
-                    JOptionPane.showMessageDialog(null, "Email inválido.", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+        listaEquipamentosModel = new DefaultListModel<>();
+        listaEquipamentos = new JList<>(listaEquipamentosModel);
+        JScrollPane scrollPane = new JScrollPane(listaEquipamentos);
+        scrollPane.setBounds(44, 360, 250, 100);
+        frmCadastroDeEmpresa.getContentPane().add(scrollPane);
 
-                JOptionPane.showMessageDialog(null, "Empresa cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        btnAdicionarEquipamento.addActionListener(e -> {
+            String equipamento = campoEquipamento.getText().trim();
+            if (!equipamento.isEmpty()) {
+                listaEquipamentosModel.addElement(equipamento);
+                campoEquipamento.setText("");
             }
         });
-        btnCadastraEmpresa.setForeground(SystemColor.textHighlight);
-        btnCadastraEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        btnCadastraEmpresa.setBounds(466, 246, 165, 27);
-        frmCadastroDePessoa.getContentPane().add(btnCadastraEmpresa);
 
-        JButton btnVoltar = new JButton("Voltar");
-        btnVoltar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                CustomerRegistration customerRegistration = new CustomerRegistration();
-                customerRegistration.main(null);
-                frmCadastroDePessoa.dispose();
+        JButton btnCadastrar = new JButton("Cadastrar");
+        btnCadastrar.setBounds(470, 381, 150, 30);
+        btnCadastrar.setForeground(SystemColor.textHighlight);
+        frmCadastroDeEmpresa.getContentPane().add(btnCadastrar);
+
+        btnCadastrar.addActionListener(e -> {
+            if (validarDados()) {
+                JOptionPane.showMessageDialog(frmCadastroDeEmpresa, "Empresa cadastrada com sucesso!");
             }
         });
-        btnVoltar.setForeground(SystemColor.textHighlight);
-        btnVoltar.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        btnVoltar.setBounds(481, 303, 138, 27);
-        frmCadastroDePessoa.getContentPane().add(btnVoltar);
     }
 
-    // Validação de Email
+    private boolean validarDados() {
+        if (!campoCNPJ.getText().matches("\\d{14}")) {
+            JOptionPane.showMessageDialog(frmCadastroDeEmpresa, "CNPJ deve conter 14 dígitos.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (!isValidEmail(campoEmail.getText())) {
+            JOptionPane.showMessageDialog(frmCadastroDeEmpresa, "Email inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+
     private boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        Pattern pat = Pattern.compile(emailRegex);
-        if (email == null) return false;
-        return pat.matcher(email).matches();
+        return Pattern.compile(emailRegex).matcher(email).matches();
     }
 }
