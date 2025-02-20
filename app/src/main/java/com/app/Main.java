@@ -2,6 +2,8 @@ package com.app;
 
 import java.awt.EventQueue;
 
+import com.app.infrastructure.database.ClientDatabaseInitializer;
+import com.app.infrastructure.database.CompanyDatabaseInitializer;
 import com.app.infrastructure.database.EmployeeDatabaseInitializer;
 import com.app.infrastructure.factories.EmployeeFactory;
 import com.app.presentation.views.auth.LoginView;
@@ -11,7 +13,9 @@ public class Main {
 	
     public static void main(String[] args) {
     	// Databases Initialize
-    	EmployeeDatabaseInitializer databaseInit = new EmployeeDatabaseInitializer();
+    	EmployeeDatabaseInitializer employeeDatabaseInit = new EmployeeDatabaseInitializer();
+    	ClientDatabaseInitializer clientDatabaseInit = new ClientDatabaseInitializer();
+    	CompanyDatabaseInitializer companyDatabaseInit = new CompanyDatabaseInitializer();
     	
     	// Factories
     	final EmployeeFactory employeeFactory = new EmployeeFactory();
@@ -22,7 +26,9 @@ public class Main {
     	EventQueue.invokeLater(new Runnable() {    		
 			public void run() {
 				try {
-					databaseInit.execute();
+					employeeDatabaseInit.execute();
+					clientDatabaseInit.execute();
+					companyDatabaseInit.execute();
 					LoginView frame = new LoginView(employeeFactory.createEmployeeController(), employeeRegisterView);
 					frame.setVisible(true);
 				} catch (Exception e) {
