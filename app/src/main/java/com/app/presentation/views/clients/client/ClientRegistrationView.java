@@ -1,4 +1,4 @@
-package com.app.presentation.views.client;
+package com.app.presentation.views.clients.client;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -9,9 +9,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
 import javax.swing.JOptionPane;
 
-public class IndividualTaxpayerRegistration {
+public class ClientRegistrationView extends JFrame {
 
     private JFrame frmCatrastroDePessoa;
     private JTextField txtCampoDeString;
@@ -21,20 +22,7 @@ public class IndividualTaxpayerRegistration {
     private JTextField CampoComplemento;
     private JTextField CampodeBairro;
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    IndividualTaxpayerRegistration window = new IndividualTaxpayerRegistration();
-                    window.frmCatrastroDePessoa.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    public IndividualTaxpayerRegistration() {
+    public ClientRegistrationView() {
         initialize();
     }
 
@@ -161,9 +149,9 @@ public class IndividualTaxpayerRegistration {
         JButton btnVoltar = new JButton("Voltar");
         btnVoltar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                CustomerRegistration customerRegistration = new CustomerRegistration();
-                customerRegistration.main(null);
-                frmCatrastroDePessoa.dispose();
+//                CustomerRegistration customerRegistration = new CustomerRegistration();
+//                customerRegistration.main(null);
+//                frmCatrastroDePessoa.dispose();
             }
         });
         btnVoltar.setForeground(SystemColor.textHighlight);

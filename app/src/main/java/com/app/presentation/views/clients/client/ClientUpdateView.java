@@ -1,4 +1,4 @@
-package com.app.presentation.views.client;
+package com.app.presentation.views.clients.client;
 
 import java.awt.Font;
 

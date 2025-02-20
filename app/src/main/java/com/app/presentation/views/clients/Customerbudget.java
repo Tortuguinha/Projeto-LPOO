@@ -1,4 +1,4 @@
-package com.app.presentation.views.client;
+package com.app.presentation.views.clients;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -24,16 +24,6 @@ public class Customerbudget<RequestQuote> {
     private JList<String> listServicos, listEquipamentos;
     private JTextField campoTextServico, campoTextCustomerName, campoTextCPF, campoTextTelephone, campoTextEmail, campoTextBrandModel, textFieldDefeito;
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                Customerbudget window = new Customerbudget();
-                window.frmOrcamentoCliente.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
 
     public Customerbudget() {
         initialize();

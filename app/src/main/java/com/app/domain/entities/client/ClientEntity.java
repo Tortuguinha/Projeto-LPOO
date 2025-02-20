@@ -1,21 +1,21 @@
 package com.app.domain.entities.client;
 
+import java.util.Date;
 
 public class ClientEntity {
     private int id;
     private String name;
     private String email;
     private String cpf;
-    private String telephone;
     private Boolean status;
+    private Date createdAt;
 
-    public ClientEntity(int id, String name, String email, String cpf, String telephone, boolean status) {
-        this.id = id;
+    public ClientEntity(String name, String email, String cpf, boolean status, Date createdAt) {
         this.name = name;
         this.email = email;
         this.cpf = cpf;
-        this.telephone = telephone;
         this.status = status;
+        this.createdAt = createdAt;
     }
 
     public int getId() {
@@ -26,39 +26,24 @@ public class ClientEntity {
         return this.name;
     }
 
-    public void setNome(String name) {
-        this.name = name;
-    }
 
     public String getEmail() {
         return this.email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    
     public String getCPF() {
         return this.cpf;
-    }
-
-    public void setCPF(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getTelefone() {
-        return this.telephone;
-    }
-
-    public void setTelefone(String telephone) {
-        this.telephone = telephone;
     }
 
     public Boolean getStatus() {
         return this.status;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public Date getCreatedAt() {
+    	return this.createdAt;
+    }
+    
+    public void setId(int id) {
+    	this.id = id;
     }
 }

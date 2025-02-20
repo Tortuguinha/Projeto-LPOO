@@ -13,8 +13,8 @@ import javax.swing.border.EmptyBorder;
 
 import com.app.domain.entities.employee.EmployeeEntity;
 import com.app.infrastructure.controllers.interfaces.IEmployeeController;
-import com.app.presentation.views.client.ClientManagementView;
-import com.app.presentation.views.client.CustomerRegistration;
+import com.app.presentation.views.clients.ClientRegisterChoiceView;
+import com.app.presentation.views.clients.client.ClientManagementView;
 import com.app.presentation.views.employee.EmployeeManagementView;
 import com.app.presentation.views.employee.EmployeeRegisterView;
 
@@ -73,8 +73,8 @@ public class DashboardView extends JFrame {
         btnRegisterClient.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnRegisterClient.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                CustomerRegistration customerRegistration = new CustomerRegistration();
-                customerRegistration.main(null);
+                ClientRegisterChoiceView clientRegisterChoice = new ClientRegisterChoiceView(_loggedEmployee, _employeeController);
+                clientRegisterChoice.setVisible(true);
                 dispose();
             }
         });

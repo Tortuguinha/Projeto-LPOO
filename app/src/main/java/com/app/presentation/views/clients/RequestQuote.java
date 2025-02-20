@@ -1,4 +1,4 @@
-package com.app.presentation.views.client;
+package com.app.presentation.views.clients;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -24,17 +24,6 @@ public class RequestQuote extends JFrame  {
     private JTextField CampoRua;
     private JTextField CampoComplemento;
     private JTextField CampoBairro;
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                RequestQuote window = new RequestQuote();
-                window.frmCadastroDePessoa.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
 
     public RequestQuote() {
         initialize();

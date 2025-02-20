@@ -1,4 +1,4 @@
-package com.app.presentation.views.client;
+package com.app.presentation.views.clients.company;
 
 import java.awt.EventQueue;
 
@@ -22,20 +22,6 @@ public class CompanyBudget {
 	private JTextField CAMPOTextContato;
 	private JTextField CampotextEmail;
 	private JTextField textField;
-
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CompanyBudget window = new CompanyBudget();
-					window.frmOramentoEmpresa.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	
 	public CompanyBudget() {

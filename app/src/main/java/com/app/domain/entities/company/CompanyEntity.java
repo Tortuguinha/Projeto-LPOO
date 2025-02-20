@@ -1,59 +1,47 @@
 package com.app.domain.entities.company;
 
-public class CompanyEntity {
-    private String companyName;
-    private String cnpj;
-    private String phone;
-    private String address;
-    private String email;
+import java.util.Date;
 
-    public CompanyEntity(String companyName, String cnpj, String phone, String address, String email) {
+public class CompanyEntity {
+	private int id;
+    private String companyName;
+    private String email;
+    private String cnpj;
+    private Boolean status;
+    private Date createdAt;
+
+    public CompanyEntity(String companyName, String email, String cnpj, boolean status, Date createdAt) {
         this.companyName = companyName;
-        this.cnpj = cnpj;
-        this.phone = phone;
-        this.address = address;
         this.email = email;
-    }
+        this.cnpj = cnpj;
+        this.status = status;
+        this.createdAt = createdAt;
+        }
 
     // Getters e Setters
     public String getCompanyName() {
-        return companyName;
+        return this.companyName;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public String getCNPJ() {
+        return this.cnpj;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
+    }
+    
+    public Boolean getStatus() {
+    	return this.status;
+    }
+    
+    public Date getCreatedAt() {
+    	return this.createdAt;
+    }
+    
+    public void setId(int id) {
+    	this.id = id;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
 }

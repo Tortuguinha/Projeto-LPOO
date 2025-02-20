@@ -135,7 +135,7 @@ public class EmployeeRepository implements IEmployeeRepository {
 			}
 			
 		} catch (Exception e) {
-			
+			 e.printStackTrace();
 		}
 		
 		return null;

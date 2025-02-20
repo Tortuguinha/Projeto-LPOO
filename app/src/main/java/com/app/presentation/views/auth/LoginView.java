@@ -52,14 +52,14 @@ public class LoginView extends JFrame {
         lblSenha.setHorizontalAlignment(SwingConstants.CENTER);
         lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 15));
         JTextField emailField = new JTextField();
-        emailField.setBounds(189, 114, 231, 25);
+        emailField.setBounds(189, 114, 212, 34);
         emailField.setHorizontalAlignment(SwingConstants.CENTER);
         JPasswordField pwdField = new JPasswordField();
-        pwdField.setBounds(189, 196, 231, 25);
+        pwdField.setBounds(189, 196, 212, 34);
         pwdField.setHorizontalAlignment(SwingConstants.CENTER);
         pwdField.setFont(new Font("Tahoma", Font.PLAIN, 15));
         JButton btnLogin = new JButton("Entrar");
-        btnLogin.setBounds(241, 245, 112, 34);
+        btnLogin.setBounds(243, 265, 112, 34);
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	String email = emailField.getText();
@@ -89,7 +89,7 @@ public class LoginView extends JFrame {
         getContentPane().add(LabelTelaDeLogin);
         
         JButton btnEsqueceuSenha = new JButton("Esqueceu Senha");
-        btnEsqueceuSenha.setBounds(228, 300, 143, 34);
+        btnEsqueceuSenha.setBounds(230, 320, 143, 34);
         btnEsqueceuSenha.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             }
@@ -107,7 +107,7 @@ public class LoginView extends JFrame {
         });
         btnCadrastarFuncionario.setForeground(SystemColor.textHighlight);
         btnCadrastarFuncionario.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        btnCadrastarFuncionario.setBounds(212, 350, 179, 34);
+        btnCadrastarFuncionario.setBounds(214, 370, 179, 34);
         getContentPane().add(btnCadrastarFuncionario);
 
         setLocationRelativeTo(null); // Centraliza a janela
