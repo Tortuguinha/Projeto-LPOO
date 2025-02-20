@@ -24,6 +24,7 @@ public class Customerbudget<RequestQuote> {
     private JList<String> listServicos, listEquipamentos;
     private JTextField campoTextServico, campoTextCustomerName, campoTextCPF, campoTextTelephone, campoTextEmail, campoTextBrandModel, textFieldDefeito;
 
+    
 
     public Customerbudget() {
         initialize();
