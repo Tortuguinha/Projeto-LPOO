@@ -90,6 +90,6 @@ public class ClientRegisterChoiceView extends JFrame {
 	        btnVoltar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 	        btnVoltar.setBounds(553, 499, 142, 40);
 	        
-	   contentPane.add(btnVoltar);
+	        contentPane.add(btnVoltar);
 	}
 }

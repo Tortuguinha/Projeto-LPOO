@@ -31,16 +31,32 @@ public class ClientController implements IClientController {
 	}
 	
 	public void createOS(ServiceOrderEntity serviceOrder) {
-		this._clientServices.registerOs(serviceOrder);
+		try {
+			this._clientServices.registerOs(serviceOrder);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public ClientEntity findClientByCpf(String cpf) {
 		
-		return this._findClientByCPFUseCase.execute(cpf);
+		try {
+			return this._findClientByCPFUseCase.execute(cpf);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 	public List<ClientEntity> returnAllClients() {
 
-		return this._clientServices.allClients();
+		try {
+			return this._clientServices.allClients();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }
