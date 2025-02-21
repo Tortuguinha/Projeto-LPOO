@@ -43,5 +43,9 @@ public class CompanyEntity {
     	this.id = id;
     }
 
+    public int getId() {
+    	return this.id;
+    }
+
 
 }

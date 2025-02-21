@@ -11,6 +11,15 @@ public class FindClientByCpfUseCase {
 	}
 	
 	public ClientEntity execute(String cpf) {
+		if (cpf == null) {
+			throw new IllegalArgumentException("O CPF não pode ser nulo");
+		}
+		if (cpf.isEmpty()) {
+			throw new IllegalArgumentException("O CPF não pode ser vazio");
+		}
+		if (!cpf.matches("\\d{11}")) {
+			throw new IllegalArgumentException("O CPF deve conter 11 dígitos numéricos");
+		}
 		 ClientEntity client = this._clientRepository.findByCPF(cpf);
 		
 		return client;

@@ -11,6 +11,21 @@ public class ContractEntity {
     private String observations;
 
     public ContractEntity(String companyName, String cnpj, LocalDate startDate, LocalDate endDate, double contractValue, String observations) {
+        if (companyName == null || companyName.isEmpty()) {
+            throw new IllegalArgumentException("Company name cannot be null or empty");
+        }
+        if (cnpj == null || cnpj.isEmpty()) {
+            throw new IllegalArgumentException("CNPJ cannot be null or empty");
+        }
+        if (startDate == null) {
+            throw new IllegalArgumentException("Start date cannot be null");
+        }
+        if (endDate == null) {
+            throw new IllegalArgumentException("End date cannot be null");
+        }
+        if (contractValue < 0) {
+            throw new IllegalArgumentException("Contract value cannot be negative");
+        }
         this.companyName = companyName;
         this.cnpj = cnpj;
         this.startDate = startDate;
