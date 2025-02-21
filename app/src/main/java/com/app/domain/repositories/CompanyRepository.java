@@ -21,6 +21,16 @@ public class CompanyRepository implements ICompanyRepository {
                 VALUES (?, ?, ?, ?, ?)
             """;
 
+       String sqlContact = """
+				INSERT INTO contact (user_id, telephone, email)
+				VALUES (?, ?, ?)
+	        """;
+
+	   String sqlAddress = """
+	    		INSERT INTO address (user_id, number, street, district, city)
+	            VALUES (?, ?, ?, ?, ?)
+	        """;
+        
         try (Connection connection = DatabaseConfig.getConnection()) {
             PreparedStatement queryCompany = connection.prepareStatement(sqlCompany, PreparedStatement.RETURN_GENERATED_KEYS);
             
@@ -32,8 +42,23 @@ public class CompanyRepository implements ICompanyRepository {
             queryCompany.execute();
 
             var generatedKeys = queryCompany.getGeneratedKeys();
+            
             if (generatedKeys.next()) {
-            	company.setId(generatedKeys.getInt(1));
+            	int companyId = generatedKeys.getInt(1);
+            	
+            	PreparedStatement queryContact = connection.prepareStatement(sqlContact);
+            	queryContact.setInt(1, companyId);
+ 	            queryContact.setString(2, contact.getTelephone());
+ 	            queryContact.setString(3, contact.getEmail());
+ 	            queryContact.executeUpdate();
+ 	
+ 	            PreparedStatement queryAddress = connection.prepareStatement(sqlAddress);
+ 	            queryAddress.setInt(1, companyId);
+ 	            queryAddress.setInt(2, address.getNumber());
+ 	            queryAddress.setString(3, address.getStreet());
+ 	            queryAddress.setString(4, address.getDistrict());
+ 	            queryAddress.setString(5, address.getCity());
+ 	            queryAddress.executeUpdate();
             }
         } catch (Exception e) {
             e.printStackTrace();

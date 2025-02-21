@@ -133,7 +133,7 @@ public class CompanyRegistrationView extends JFrame {
 //                JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso!");
 //            }
         	
-        	CompanyEntity client = new CompanyEntity(
+        	CompanyEntity company = new CompanyEntity(
         			campoNomeEmpresa.getText(),
         			campoEmail.getText(),
         			campoCNPJ.getText(),
@@ -141,19 +141,19 @@ public class CompanyRegistrationView extends JFrame {
         			new Date()
         			);
         	
-        	CompanyContactEntity clientContact = new CompanyContactEntity(
+        	CompanyContactEntity companyContact = new CompanyContactEntity(
         				campoTelefone.getText(),
         				campoEmail.getText()
         			);
         	
-        	CompanyAddressEntity clientAddress = new CompanyAddressEntity(
+        	CompanyAddressEntity companyAddress = new CompanyAddressEntity(
         			Integer.parseInt(numeroField.getText()),
         			ruaField.getText(),
         			bairroField.getText(),
         			cidadeField.getText()
         			);
         	
-        	companyController.register(client, clientContact, clientAddress);
+        	companyController.register(company, companyContact, companyAddress);
         	
         	
         });
