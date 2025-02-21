@@ -14,6 +14,18 @@ public class RegisterClientUseCase {
 	}
 	
 	public void execute(ClientEntity client, ClientContactEntity contact, ClientAddressEntity address) {
+			    if (client == null) {
+	        throw new IllegalArgumentException("O cliente não pode ser nulo");
+	    }
+	    if (contact == null) {
+	        throw new IllegalArgumentException("O contato não pode ser nulo");
+	    }
+	    if (address == null) {
+	        throw new IllegalArgumentException("O endereço não pode ser nulo");
+	    }
+		if (_clientRepository.findByEmail(client.getEmail()) != null) {
+		    throw new IllegalArgumentException("Cliente já cadastrado");
+		}
 		this._clientRepository.save(client, contact, address);
 	}
 }
