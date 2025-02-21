@@ -3,3 +3,5 @@
 /FindCompanyUseCase.class
 /ReturnCompanysUseCase$ReturnEmployeesUseCase.class
 /FindCompanyByCnpjUseCase.class
+/RegisterClientOSUseCase.class
+/RegisterCompanyOSUseCase.class

@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.app.domain.entities.ServiceOrderEntity;
 import com.app.domain.entities.company.CompanyAddressEntity;
 import com.app.domain.entities.company.CompanyContactEntity;
 import com.app.domain.entities.company.CompanyEntity;
@@ -63,6 +64,46 @@ public class CompanyRepository implements ICompanyRepository {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public void updateOS(ServiceOrderEntity serviceOrder) {
+    	
+    	String sql = """
+                UPDATE service_order
+                SET budget_code = ?, 
+                    equip_desc = ?, 
+                    model = ?, 
+                    serial_num = ?, 
+                    details = ?, 
+                    problems = ?, 
+                    urgency_level = ?, 
+                    delivery_date = ?, 
+                    tech_response = ?, 
+                    final_cost = ?, 
+                    payment_form = ?
+                WHERE document_id = ?
+            """;
+    	try (Connection connection = DatabaseConfig.getConnection()) {
+			
+    		PreparedStatement query = connection.prepareStatement(sql);
+    		
+    		query.setString(1, serviceOrder.getBudgetCode());
+    		query.setString(2, serviceOrder.getEquipDesc());
+    		query.setString(3, serviceOrder.getModel());
+    		query.setString(4, serviceOrder.getSerialNum());
+    		query.setString(5, serviceOrder.getDetails());
+    		query.setString(6, serviceOrder.getProblems());
+    		query.setString(7, serviceOrder.getUrgencyLevel());
+    		query.setDate(8, new Date(serviceOrder.getDelivaryDate().getTime()));
+    		query.setString(9, serviceOrder.getTechResponse());
+    		query.setString(10, serviceOrder.getFinalCoust());
+    		query.setString(11, serviceOrder.getPaymentForm());
+    		query.setString(12, serviceOrder.getDocumentID());
+    		
+    		query.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
 
     public CompanyEntity findByEmail(String email) {

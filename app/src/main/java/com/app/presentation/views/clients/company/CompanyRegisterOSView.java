@@ -18,7 +18,7 @@ import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
-public class CompanyRegisterOSView {
+public class CompanyRegisterOSView extends JFrame {
 
 	private JFrame frame;
 	private JTextField cnpjField;
@@ -175,7 +175,10 @@ public class CompanyRegisterOSView {
 							null, 
 							null);
 					
-						ClientRegisterOSSecondaryView clientRegisterOSSec = new ClientRegisterOSSecondaryView(serviceOrder);
+						CompanyRegisterOSSecondaryView companyRegisterOSSec = new CompanyRegisterOSSecondaryView(serviceOrder);
+						
+						companyRegisterOSSec.setVisible(true);
+						dispose();
 					
 				} catch (ParseException error) {
 						error.printStackTrace();

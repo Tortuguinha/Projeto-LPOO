@@ -18,7 +18,7 @@ import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
-public class ClientRegisterOSView {
+public class ClientRegisterOSView extends JFrame {
 
 	private JFrame frame;
 	private JTextField cpfField;
@@ -175,6 +175,10 @@ public class ClientRegisterOSView {
 							null, 
 							null);
 					
+					ClientRegisterOSSecondaryView clientRegisterOSSec = new ClientRegisterOSSecondaryView(serviceOrder);
+					
+					clientRegisterOSSec.setVisible(true);
+					dispose();
 					 
 					
 				} catch (ParseException error) {
