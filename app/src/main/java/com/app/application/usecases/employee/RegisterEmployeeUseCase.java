@@ -23,6 +23,9 @@ public class RegisterEmployeeUseCase {
 	    if (address == null) {
 	        throw new IllegalArgumentException("O endereço não pode ser nulo");
 	    }
+		if (_employeeRepository.findByEmail(employee.getEmail()) != null) {
+		    throw new IllegalArgumentException("Funcionário já cadastrado");
+		}
 	    this._employeeRepository.save(employee, contact, address);
 	}
 }

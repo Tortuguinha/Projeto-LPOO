@@ -13,6 +13,9 @@ public class RegisterCompanyUseCase {
 	}
 	
 	public void execute(CompanyEntity company, CompanyContactEntity contact, CompanyAddressEntity address) {
+		if (company == null || contact == null || address == null) {
+			throw new IllegalArgumentException("Company, contact and address must be informed");
+		}
 		this._companyRepository.save(company, contact, address);
 	}
 }
