@@ -44,10 +44,10 @@ public class ClientRegistrationView extends JFrame {
         lblDados.setFont(new Font("Tahoma", Font.BOLD, 14));
         contentPane.add(lblDados);
 
-        JLabel lblNomeEmpresa = new JLabel("Nome do Cliente:");
-        lblNomeEmpresa.setBounds(69, 92, 150, 25);
-        lblNomeEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        contentPane.add(lblNomeEmpresa);
+        JLabel lblNomClient = new JLabel("Nome do Cliente:");
+        lblNomClient.setBounds(69, 92, 150, 25);
+        lblNomClient.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        contentPane.add(lblNomClient);
 
         campoNomeCliente = new JTextField();
         campoNomeCliente.setBounds(69, 117, 207, 25);

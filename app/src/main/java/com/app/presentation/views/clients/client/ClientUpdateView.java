@@ -76,7 +76,6 @@ public class ClientUpdateView extends JFrame {
         saveButton.setBounds(409, 306, 117, 35);
         saveButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
         saveButton.addActionListener(e -> {
-      
         });
 
         // Adicionando os campos e botão ao painel

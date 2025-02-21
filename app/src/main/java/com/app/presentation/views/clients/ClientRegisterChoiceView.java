@@ -58,7 +58,7 @@ public class ClientRegisterChoiceView extends JFrame {
 		JButton legalPersonbtn = new JButton("Pessoa Jurídica (CNPJ)");
 		legalPersonbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CompanyRegistrationView companyRegisterView = new CompanyRegistrationView();
+				CompanyRegistrationView companyRegisterView = new CompanyRegistrationView(_employeeLogged);
 				companyRegisterView.setVisible(true);
 				dispose();
 			}
