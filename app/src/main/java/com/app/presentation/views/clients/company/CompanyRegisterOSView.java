@@ -2,15 +2,12 @@ package com.app.presentation.views.clients.company;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 import java.awt.Font;
-import javax.swing.JTextField;
 
 import com.app.domain.entities.ServiceOrderEntity;
 import com.app.presentation.views.clients.client.ClientRegisterOSSecondaryView;
 
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,7 +17,7 @@ import java.awt.SystemColor;
 
 public class CompanyRegisterOSView extends JFrame {
 
-	private JFrame frame;
+	private JPanel contentPane;
 	private JTextField cnpjField;
 	private JTextField codeOSField;
 	private JTextField codeBUField;
@@ -37,7 +34,7 @@ public class CompanyRegisterOSView extends JFrame {
 	}
 
 	private void initialize() {
-		frame = new JFrame();
+		JFrame frame = new JFrame();
 		frame.setBounds(100, 100, 702, 412);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
