@@ -3,6 +3,7 @@ package com.app.infrastructure.controllers.company;
 import java.util.List;
 
 import com.app.application.usecases.company.FindCompanyByCnpjUseCase;
+import com.app.domain.entities.ServiceOrderEntity;
 import com.app.domain.entities.company.CompanyAddressEntity;
 import com.app.domain.entities.company.CompanyContactEntity;
 import com.app.domain.entities.company.CompanyEntity;
@@ -24,6 +25,14 @@ public class CompanyController implements ICompanyController {
 	public void register(CompanyEntity company, CompanyContactEntity contact, CompanyAddressEntity address) {
 		try {
 			this._companyServices.register(company, contact, address);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void createOS(ServiceOrderEntity serviceOrder) {
+		try {
+			this._companyServices.registerOs(serviceOrder);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

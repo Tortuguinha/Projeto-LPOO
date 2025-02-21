@@ -14,6 +14,7 @@ public class CompanyDatabaseInitializer implements IDatabaseInitializer {
 			query.execute(createCompanyTable());
 			query.execute(createContactsTable());
 			query.execute(createAddressesTable());
+			query.execute(createServiceOrderTable());
 
 			
 		} catch(Exception e) {
@@ -58,5 +59,27 @@ public class CompanyDatabaseInitializer implements IDatabaseInitializer {
                     FOREIGN KEY (user_id) REFERENCES company(id) ON DELETE CASCADE
                 );
             """;
+    }
+    
+    private static String createServiceOrderTable() {
+        return """
+            CREATE TABLE IF NOT EXISTS service_order (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                document_id CHAR(14) NOT NULL,
+                budget_code VARCHAR(50) NOT NULL,
+                equip_desc VARCHAR(255) NOT NULL,
+                model VARCHAR(100) NOT NULL,
+                serial_num VARCHAR(100) NOT NULL,
+                details TEXT NOT NULL,
+                problems TEXT NOT NULL,
+                urgency_level VARCHAR(50) NOT NULL,
+                delivery_date DATETIME NOT NULL,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                tech_response TEXT,
+                final_cost DECIMAL(10,2) NOT NULL,
+                payment_form VARCHAR(100) NOT NULL,
+                FOREIGN KEY (document_id) REFERENCES client(cnpj) ON DELETE CASCADE
+            );
+        """;
     }
 }

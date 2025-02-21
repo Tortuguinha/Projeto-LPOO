@@ -15,6 +15,7 @@ import com.app.domain.entities.employee.EmployeeEntity;
 import com.app.infrastructure.controllers.interfaces.IClientController;
 import com.app.infrastructure.controllers.interfaces.IEmployeeController;
 import com.app.presentation.views.clients.ClientRegisterChoiceView;
+import com.app.presentation.views.clients.OSRegisterChoice;
 import com.app.presentation.views.clients.client.ClientManagementView;
 import com.app.presentation.views.employee.EmployeeManagementView;
 import com.app.presentation.views.employee.EmployeeRegisterView;
@@ -131,6 +132,9 @@ public class DashboardView extends JFrame {
         btnCadastroDeOs = new JButton("Cadastro de O.S");
         btnCadastroDeOs.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		OSRegisterChoice osRegister = new OSRegisterChoice(_loggedEmployee);
+        		osRegister.setVisible(true);
+        		dispose();
         	}
         });
         btnCadastroDeOs.setForeground(SystemColor.textHighlight);

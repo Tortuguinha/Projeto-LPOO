@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.app.domain.entities.ServiceOrderEntity;
 import com.app.domain.entities.company.CompanyAddressEntity;
 import com.app.domain.entities.company.CompanyContactEntity;
 import com.app.domain.entities.company.CompanyEntity;
@@ -21,6 +22,16 @@ public class CompanyRepository implements ICompanyRepository {
                 VALUES (?, ?, ?, ?, ?)
             """;
 
+       String sqlContact = """
+				INSERT INTO contact (user_id, telephone, email)
+				VALUES (?, ?, ?)
+	        """;
+
+	   String sqlAddress = """
+	    		INSERT INTO address (user_id, number, street, district, city)
+	            VALUES (?, ?, ?, ?, ?)
+	        """;
+        
         try (Connection connection = DatabaseConfig.getConnection()) {
             PreparedStatement queryCompany = connection.prepareStatement(sqlCompany, PreparedStatement.RETURN_GENERATED_KEYS);
             
@@ -32,12 +43,67 @@ public class CompanyRepository implements ICompanyRepository {
             queryCompany.execute();
 
             var generatedKeys = queryCompany.getGeneratedKeys();
+            
             if (generatedKeys.next()) {
-            	company.setId(generatedKeys.getInt(1));
+            	int companyId = generatedKeys.getInt(1);
+            	
+            	PreparedStatement queryContact = connection.prepareStatement(sqlContact);
+            	queryContact.setInt(1, companyId);
+ 	            queryContact.setString(2, contact.getTelephone());
+ 	            queryContact.setString(3, contact.getEmail());
+ 	            queryContact.executeUpdate();
+ 	
+ 	            PreparedStatement queryAddress = connection.prepareStatement(sqlAddress);
+ 	            queryAddress.setInt(1, companyId);
+ 	            queryAddress.setInt(2, address.getNumber());
+ 	            queryAddress.setString(3, address.getStreet());
+ 	            queryAddress.setString(4, address.getDistrict());
+ 	            queryAddress.setString(5, address.getCity());
+ 	            queryAddress.executeUpdate();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public void updateOS(ServiceOrderEntity serviceOrder) {
+    	
+    	String sql = """
+                UPDATE service_order
+                SET budget_code = ?, 
+                    equip_desc = ?, 
+                    model = ?, 
+                    serial_num = ?, 
+                    details = ?, 
+                    problems = ?, 
+                    urgency_level = ?, 
+                    delivery_date = ?, 
+                    tech_response = ?, 
+                    final_cost = ?, 
+                    payment_form = ?
+                WHERE document_id = ?
+            """;
+    	try (Connection connection = DatabaseConfig.getConnection()) {
+			
+    		PreparedStatement query = connection.prepareStatement(sql);
+    		
+    		query.setString(1, serviceOrder.getBudgetCode());
+    		query.setString(2, serviceOrder.getEquipDesc());
+    		query.setString(3, serviceOrder.getModel());
+    		query.setString(4, serviceOrder.getSerialNum());
+    		query.setString(5, serviceOrder.getDetails());
+    		query.setString(6, serviceOrder.getProblems());
+    		query.setString(7, serviceOrder.getUrgencyLevel());
+    		query.setDate(8, new Date(serviceOrder.getDelivaryDate().getTime()));
+    		query.setString(9, serviceOrder.getTechResponse());
+    		query.setString(10, serviceOrder.getFinalCoust());
+    		query.setString(11, serviceOrder.getPaymentForm());
+    		query.setString(12, serviceOrder.getDocumentID());
+    		
+    		query.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
 
     public CompanyEntity findByEmail(String email) {

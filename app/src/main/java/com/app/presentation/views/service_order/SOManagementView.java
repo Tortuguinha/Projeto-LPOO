@@ -126,33 +126,4 @@ public class SOManagementView extends JFrame {
 	        getContentPane().add(ButtonVoltar);
 	    }
 
-	    private boolean validarData(String data) {
-	        String[] partes = data.split("/");
-	        int dia = Integer.parseInt(partes[0]);
-	        int mes = Integer.parseInt(partes[1]);
-	        int ano = Integer.parseInt(partes[2]);
-
-	        if (mes < 1 || mes > 12 || dia < 1 || dia > 31 || ano > 2025) {
-	            return false;
-	        }
-
-	        // Verifica os dias máximos de cada mês
-	        if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30) {
-	            return false;
-	        }
-	        if (mes == 2) {
-	            if ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0)) {
-	                if (dia > 29) {
-	                    return false;
-	                }
-	            } else {
-	                if (dia > 28) {
-	                    return false;
-	                }
-	            }
-	        }
-
-	        return true;
-	}
-
 }
