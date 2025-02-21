@@ -14,6 +14,15 @@ public class RegisterEmployeeUseCase {
 	}
 	
 	public void execute(EmployeeEntity employee, EmployeeContactEntity contact, EmployeeAddressEntity address) {
-		this._employeeRepository.save(employee, contact, address);
+	    if (employee == null) {
+	        throw new IllegalArgumentException("O funcionário não pode ser nulo");
+	    }
+	    if (contact == null) {
+	        throw new IllegalArgumentException("O contato não pode ser nulo");
+	    }
+	    if (address == null) {
+	        throw new IllegalArgumentException("O endereço não pode ser nulo");
+	    }
+	    this._employeeRepository.save(employee, contact, address);
 	}
 }
