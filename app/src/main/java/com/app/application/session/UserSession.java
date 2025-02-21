@@ -12,7 +12,7 @@ public class UserSession {
 	}
 	
 	public static void startSesion(EmployeeEntity employeeEntity) {
-		if(instance != null) {
+		if(instance == null) {
 			instance = new UserSession(employeeEntity);
 		}
 	}

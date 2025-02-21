@@ -7,10 +7,22 @@ public class EmployeeAddressEntity {
    private String City;
    
    public EmployeeAddressEntity(int number, String street, String district, String city) {
-	   this.Number = number;
-	   this.Street = street;
-	   this.District = district;
-	   this.City = city;
+       if (number < 0) {
+           throw new IllegalArgumentException("Number cannot be negative");
+       }
+       if (street == null || street.isEmpty()) {
+           throw new IllegalArgumentException("Street cannot be null or empty");
+       }
+       if (district == null || district.isEmpty()) {
+           throw new IllegalArgumentException("District cannot be null or empty");
+       }
+       if (city == null || city.isEmpty()) {
+           throw new IllegalArgumentException("City cannot be null or empty");
+       }
+       this.Number = number;
+       this.Street = street;
+       this.District = district;
+       this.City = city;
    }
    
    public Integer getNumber() {
