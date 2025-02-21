@@ -132,7 +132,7 @@ public class DashboardView extends JFrame {
         btnCadastroDeOs = new JButton("Cadastro de O.S");
         btnCadastroDeOs.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		OSRegisterChoice osRegister = new OSRegisterChoice();
+        		OSRegisterChoice osRegister = new OSRegisterChoice(_loggedEmployee);
         		osRegister.setVisible(true);
         		dispose();
         	}
