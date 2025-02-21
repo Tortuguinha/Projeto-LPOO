@@ -1,6 +1,4 @@
-package com.app.presentation.views.clients.company;
-
-import java.awt.EventQueue;
+package com.app.presentation.views.clients;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,36 +8,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
-public class OsRegistration {
+public class OSRegisterChoice  extends JFrame {
 
 	private JFrame frame;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					OsRegistration window = new OsRegistration();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public OsRegistration() {
+	public OSRegisterChoice() {
 		initialize();
 	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 504, 447);

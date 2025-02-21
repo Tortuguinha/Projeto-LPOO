@@ -3,6 +3,8 @@ package com.app.infrastructure.controllers.client;
 import java.util.List;
 
 import com.app.application.usecases.clients.FindClientByCpfUseCase;
+import com.app.application.usecases.clients.RegisterClientOSUseCase;
+import com.app.domain.entities.ServiceOrderEntity;
 import com.app.domain.entities.client.ClientAddressEntity;
 import com.app.domain.entities.client.ClientContactEntity;
 import com.app.domain.entities.client.ClientEntity;
@@ -28,13 +30,33 @@ public class ClientController implements IClientController {
 		}
 	}
 	
+	public void createOS(ServiceOrderEntity serviceOrder) {
+		try {
+			this._clientServices.registerOs(serviceOrder);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public ClientEntity findClientByCpf(String cpf) {
 		
-		return this._findClientByCPFUseCase.execute(cpf);
+		try {
+			return this._findClientByCPFUseCase.execute(cpf);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 	public List<ClientEntity> returnAllClients() {
 
-		return this._clientServices.allClients();
+		try {
+			return this._clientServices.allClients();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }

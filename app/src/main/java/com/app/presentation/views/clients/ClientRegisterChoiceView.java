@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.app.domain.entities.employee.EmployeeEntity;
-import com.app.infrastructure.controllers.interfaces.IClientController;
 import com.app.infrastructure.controllers.interfaces.IEmployeeController;
 import com.app.presentation.views.DashboardView;
 import com.app.presentation.views.clients.client.ClientRegistrationView;
