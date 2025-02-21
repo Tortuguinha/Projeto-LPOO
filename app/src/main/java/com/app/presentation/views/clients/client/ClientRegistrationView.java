@@ -1,186 +1,178 @@
 package com.app.presentation.views.clients.client;
 
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.SystemColor;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import java.util.Date;
+import java.util.regex.Pattern;
+import javax.swing.*;
 
-import javax.swing.JOptionPane;
+import com.app.domain.entities.client.ClientAddressEntity;
+import com.app.domain.entities.client.ClientContactEntity;
+import com.app.domain.entities.client.ClientEntity;
+import com.app.domain.entities.employee.EmployeeEntity;
+import com.app.infrastructure.controllers.interfaces.IClientController;
+import com.app.infrastructure.factories.ClientFactory;
 
 public class ClientRegistrationView extends JFrame {
 
-    private JFrame frmCatrastroDePessoa;
-    private JTextField txtCampoDeString;
-    private JTextField CampoCPF;
-    private JTextField campodeCidade;
-    private JTextField CampoRua;
-    private JTextField CampoComplemento;
-    private JTextField CampodeBairro;
+	private static final long serialVersionUID = 1L;
+	private JTextField campoNomeCliente, campoCPF, campoTelefone, campoEmail;
+    
+    private IClientController clientController = ClientFactory.getInstance();
 
-    public ClientRegistrationView() {
-        initialize();
-    }
+    EmployeeEntity _employeeLogged;
+    private JTextField cidadeField;
+    private JTextField bairroField;
+    private JTextField ruaField;
+    private JTextField numeroField;
+    
+    public ClientRegistrationView(EmployeeEntity employeeLogged) {
+    	
+    	this._employeeLogged = employeeLogged;
+    	
+        setTitle("Cadastro de Clientes");
+        setBounds(100, 100, 750, 550);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    private void initialize() {
-        frmCatrastroDePessoa = new JFrame();
-        frmCatrastroDePessoa.setTitle("Cadastro de Pessoa Física (CPF)");
-        frmCatrastroDePessoa.setBounds(100, 100, 703, 528);
-        frmCatrastroDePessoa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frmCatrastroDePessoa.getContentPane().setLayout(null);
+        JPanel contentPane = new JPanel();
+        contentPane.setLayout(null);
+        setContentPane(contentPane);
+
+        JLabel lblDados = new JLabel("Dados do Cliente");
+        lblDados.setBounds(69, 52, 150, 30);
+        lblDados.setFont(new Font("Tahoma", Font.BOLD, 14));
+        contentPane.add(lblDados);
+
+        JLabel lblNomeEmpresa = new JLabel("Nome do Cliente:");
+        lblNomeEmpresa.setBounds(69, 92, 150, 25);
+        lblNomeEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        contentPane.add(lblNomeEmpresa);
+
+        campoNomeCliente = new JTextField();
+        campoNomeCliente.setBounds(69, 117, 207, 25);
+        contentPane.add(campoNomeCliente);
+
+        JLabel lblCPF = new JLabel("CPF:");
+        lblCPF.setBounds(69, 144, 150, 25);
+        lblCPF.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        contentPane.add(lblCPF);
+
+        campoCPF = new JTextField();
+        campoCPF.setBounds(69, 169, 207, 25);
+        contentPane.add(campoCPF);
+
+        JLabel lblTelefone = new JLabel("Telefone:");
+        lblTelefone.setBounds(69, 212, 150, 25);
+        lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        contentPane.add(lblTelefone);
+
+        campoTelefone = new JTextField();
+        campoTelefone.setBounds(69, 237, 207, 25);
+        contentPane.add(campoTelefone);
+
+        JLabel lblEmail = new JLabel("Email:");
+        lblEmail.setBounds(69, 272, 150, 25);
+        lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        contentPane.add(lblEmail);
+
+        campoEmail = new JTextField();
+        campoEmail.setBounds(69, 297, 207, 25);
+        contentPane.add(campoEmail);
+
+        JButton btnCadastrar = new JButton("Cadastrar");
+        btnCadastrar.setBounds(470, 381, 150, 30);
+        btnCadastrar.setForeground(SystemColor.textHighlight);
+        contentPane.add(btnCadastrar);
         
-        JLabel lblNewLabel = new JLabel("Cadastro De Cliente");
-        lblNewLabel.setForeground(SystemColor.textHighlight);
-        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblNewLabel.setBounds(35, 23, 136, 24);
-        frmCatrastroDePessoa.getContentPane().add(lblNewLabel);
-
-        JLabel lblDadosPessoais = new JLabel("Dados Pessoais");
-        lblDadosPessoais.setForeground(SystemColor.textHighlight);
-        lblDadosPessoais.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblDadosPessoais.setBounds(35, 67, 109, 24);
-        frmCatrastroDePessoa.getContentPane().add(lblDadosPessoais);
-
-        txtCampoDeString = new JTextField();
-        txtCampoDeString.setBounds(35, 139, 172, 20);
-        frmCatrastroDePessoa.getContentPane().add(txtCampoDeString);
-        txtCampoDeString.setColumns(10);
-
-        JLabel lblCpf = new JLabel("CPF");
-        lblCpf.setForeground(SystemColor.textHighlight);
-        lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblCpf.setBounds(35, 183, 109, 24);
-        frmCatrastroDePessoa.getContentPane().add(lblCpf);
-
-        CampoCPF = new JTextField();
-        CampoCPF.setColumns(10);
-        CampoCPF.setBounds(35, 202, 172, 20);
-        frmCatrastroDePessoa.getContentPane().add(CampoCPF);
-
-        JLabel lblEndereo = new JLabel("Endereço");
-        lblEndereo.setForeground(SystemColor.textHighlight);
-        lblEndereo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblEndereo.setBounds(280, 67, 109, 24);
-        frmCatrastroDePessoa.getContentPane().add(lblEndereo);
-
-        JLabel lblNomeCliente = new JLabel("Nome Cliente");
-        lblNomeCliente.setForeground(SystemColor.textHighlight);
-        lblNomeCliente.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblNomeCliente.setBounds(35, 114, 109, 24);
-        frmCatrastroDePessoa.getContentPane().add(lblNomeCliente);
-
         JLabel lblCidade = new JLabel("Cidade");
-        lblCidade.setForeground(SystemColor.textHighlight);
         lblCidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblCidade.setBounds(268, 114, 109, 24);
-        frmCatrastroDePessoa.getContentPane().add(lblCidade);
-
-        JLabel lblBairro = new JLabel("Bairro");
-        lblBairro.setForeground(SystemColor.textHighlight);
-        lblBairro.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblBairro.setBounds(430, 114, 109, 24);
-        frmCatrastroDePessoa.getContentPane().add(lblBairro);
-
-        JLabel lblRua = new JLabel("Rua");
-        lblRua.setForeground(SystemColor.textHighlight);
-        lblRua.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblRua.setBounds(268, 183, 109, 24);
-        frmCatrastroDePessoa.getContentPane().add(lblRua);
-
-        JLabel lblComplemento = new JLabel("Complemento");
-        lblComplemento.setForeground(SystemColor.textHighlight);
-        lblComplemento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblComplemento.setBounds(430, 183, 109, 24);
-        frmCatrastroDePessoa.getContentPane().add(lblComplemento);
-
-        campodeCidade = new JTextField();
-        campodeCidade.setColumns(10);
-        campodeCidade.setBounds(266, 139, 136, 20);
-        frmCatrastroDePessoa.getContentPane().add(campodeCidade);
-
-        CampodeBairro = new JTextField();
-        CampodeBairro.setColumns(10);
-        CampodeBairro.setBounds(430, 139, 136, 20);
-        frmCatrastroDePessoa.getContentPane().add(CampodeBairro);
-
-        CampoRua = new JTextField();
-        CampoRua.setColumns(10);
-        CampoRua.setBounds(268, 202, 136, 20);
-        frmCatrastroDePessoa.getContentPane().add(CampoRua);
-
-        CampoComplemento = new JTextField();
-        CampoComplemento.setColumns(10);
-        CampoComplemento.setBounds(430, 202, 136, 20);
-        frmCatrastroDePessoa.getContentPane().add(CampoComplemento);
-
-        JButton btnCadastrarCliente = new JButton("Cadastrar Cliente");
-        btnCadastrarCliente.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        btnCadastrarCliente.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String nomeCliente = txtCampoDeString.getText();
-                String cpf = CampoCPF.getText();
-                String cidade = campodeCidade.getText();
-                String rua = CampoRua.getText();
-                String bairro = CampodeBairro.getText();
-                String complemento = CampoComplemento.getText();
-
-                // Validação de CPF
-                if (!isValidCPF(cpf)) {
-                    JOptionPane.showMessageDialog(null, "CPF inválido. Deve ter exatamente 11 dígitos numéricos.", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                // Formatação de CPF
-                cpf = formatCPF(cpf);
-
-                // Lógica de cadastro do cliente
-                JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!\nCPF: " + cpf, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
-        btnCadastrarCliente.setForeground(SystemColor.textHighlight);
-        btnCadastrarCliente.setBounds(492, 290, 142, 40);
-        frmCatrastroDePessoa.getContentPane().add(btnCadastrarCliente);
+        lblCidade.setBounds(470, 152, 150, 25);
+        contentPane.add(lblCidade);
         
-        // Botão Voltar
-        JButton btnVoltar = new JButton("Voltar");
-        btnVoltar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-//                CustomerRegistration customerRegistration = new CustomerRegistration();
-//                customerRegistration.main(null);
-//                frmCatrastroDePessoa.dispose();
-            }
+        cidadeField = new JTextField();
+        cidadeField.setBounds(469, 179, 151, 25);
+        contentPane.add(cidadeField);
+        
+        bairroField = new JTextField();
+        bairroField.setBounds(469, 121, 151, 25);
+        contentPane.add(bairroField);
+        
+        ruaField = new JTextField();
+        ruaField.setBounds(340, 179, 119, 25);
+        contentPane.add(ruaField);
+        
+        JLabel lblEndereo = new JLabel("Endereço");
+        lblEndereo.setFont(new Font("Tahoma", Font.BOLD, 14));
+        lblEndereo.setBounds(340, 54, 150, 30);
+        contentPane.add(lblEndereo);
+        
+        JLabel lblBairro = new JLabel("Bairro");
+        lblBairro.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        lblBairro.setBounds(470, 94, 150, 25);
+        contentPane.add(lblBairro);
+        
+        JLabel lblRua = new JLabel("Rua");
+        lblRua.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        lblRua.setBounds(340, 154, 119, 25);
+        contentPane.add(lblRua);
+        
+        numeroField = new JTextField();
+        numeroField.setBounds(340, 119, 119, 25);
+        contentPane.add(numeroField);
+        
+        JLabel lblNumero = new JLabel("Numero");
+        lblNumero.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        lblNumero.setBounds(340, 94, 119, 25);
+        contentPane.add(lblNumero);
+
+        btnCadastrar.addActionListener(e -> {       	
+//        	
+//        	if (validarDados()) {
+//        		
+//                JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso!");
+//            }
+        	
+        	ClientEntity client = new ClientEntity(
+        			campoNomeCliente.getText(),
+        			campoEmail.getText(),
+        			campoCPF.getText(),
+        			true,
+        			new Date()
+        			);
+        	
+        	ClientContactEntity clientContact = new ClientContactEntity(
+        				campoTelefone.getText(),
+        				campoEmail.getText()
+        			);
+        	
+        	ClientAddressEntity clientAddress = new ClientAddressEntity(
+        			Integer.parseInt(numeroField.getText()),
+        			ruaField.getText(),
+        			bairroField.getText(),
+        			cidadeField.getText()
+        			);
+        	
+        	clientController.register(client, clientContact, clientAddress);
+        	
+        	
         });
-        btnVoltar.setForeground(SystemColor.textHighlight);
-        btnVoltar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        btnVoltar.setBounds(492, 341, 142, 40);
-        frmCatrastroDePessoa.getContentPane().add(btnVoltar);
     }
 
-    // Validação de CPF
-    private boolean isValidCPF(String cpf) {
-        // Remove todos os caracteres especiais
-        cpf = cpf.replaceAll("[^\\d]", "");
-
-        // Verifica se o CPF tem exatamente 11 dígitos
-        if (cpf.length() != 11) {
+    private boolean validarDados() {
+        if (!campoCPF.getText().matches("\\d{11}")) {
+            JOptionPane.showMessageDialog(this, "CPF deve conter 11 dígitos.", "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-
-        // Verifica se todos os dígitos são iguais (CPF inválido)
-        if (cpf.matches("(\\d)\\1{10}")) {
+        if (!isValidEmail(campoEmail.getText())) {
+            JOptionPane.showMessageDialog(this, "Email inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-
         return true;
     }
 
-    // Formatação de CPF
-    private String formatCPF(String cpf) {
-        cpf = cpf.replaceAll("[^\\d]", ""); // Remove caracteres especiais
-        return cpf.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return Pattern.compile(emailRegex).matcher(email).matches();
     }
 }

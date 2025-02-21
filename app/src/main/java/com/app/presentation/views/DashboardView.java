@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.app.domain.entities.employee.EmployeeEntity;
+import com.app.infrastructure.controllers.interfaces.IClientController;
 import com.app.infrastructure.controllers.interfaces.IEmployeeController;
 import com.app.presentation.views.clients.ClientRegisterChoiceView;
 import com.app.presentation.views.clients.client.ClientManagementView;
@@ -43,7 +44,9 @@ public class DashboardView extends JFrame {
     JLabel lblSuporte;
     JLabel lblPresentation;
 
-    public DashboardView(EmployeeEntity loggedEmployee, IEmployeeController employeeController) {
+    public DashboardView(
+    		EmployeeEntity loggedEmployee, 
+    		IEmployeeController employeeController) {
         this._loggedEmployee = loggedEmployee;
         this._employeeController = employeeController;
         this.components();
@@ -73,7 +76,11 @@ public class DashboardView extends JFrame {
         btnRegisterClient.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnRegisterClient.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ClientRegisterChoiceView clientRegisterChoice = new ClientRegisterChoiceView(_loggedEmployee, _employeeController);
+                ClientRegisterChoiceView clientRegisterChoice = new ClientRegisterChoiceView(
+                		_loggedEmployee, 
+                		_employeeController
+              
+                		);
                 clientRegisterChoice.setVisible(true);
                 dispose();
             }
@@ -105,12 +112,6 @@ public class DashboardView extends JFrame {
         btnFuncionarios.setForeground(SystemColor.textHighlight);
         btnFuncionarios.setFont(new Font("Tahoma", Font.PLAIN, 13));
         btnFuncionarios.addActionListener(new ActionListener() {
-        	@SuppressWarnings("unused")
-			public void actionPerformed1(ActionEvent e) {
-        		EmployeeManagementView employeeManagement = new EmployeeManagementView(_loggedEmployee, _employeeController);
-        		employeeManagement.setVisible(true);
-        		dispose();
-        	}
             public void actionPerformed(ActionEvent e) {
                 EmployeeManagementView employeeManagement = new EmployeeManagementView(_loggedEmployee, _employeeController);
                 employeeManagement.setVisible(true);

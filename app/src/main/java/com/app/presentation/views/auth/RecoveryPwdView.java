@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.app.infrastructure.controllers.interfaces.IClientController;
 import com.app.infrastructure.controllers.interfaces.IEmployeeController;
 import com.app.presentation.views.employee.EmployeeRegisterView;
 
@@ -22,8 +23,8 @@ public class RecoveryPwdView extends JFrame {
     JTextField usuarioField;
     private final IEmployeeController _employeeController;
     private final EmployeeRegisterView _employeeRegisterView;
-
-    public RecoveryPwdView(IEmployeeController employeeController, EmployeeRegisterView employeeRegisterView) {
+    
+    public RecoveryPwdView(IEmployeeController employeeController, EmployeeRegisterView employeeRegisterView, IClientController clientController) {
         this._employeeController = employeeController;
         this._employeeRegisterView = employeeRegisterView;
         

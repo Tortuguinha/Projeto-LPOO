@@ -5,6 +5,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.app.domain.entities.employee.EmployeeEntity;
+import com.app.infrastructure.controllers.interfaces.IClientController;
 import com.app.infrastructure.controllers.interfaces.IEmployeeController;
 import com.app.presentation.views.DashboardView;
 
@@ -20,7 +21,10 @@ public class EmployeeManagementView extends JFrame {
     private JTable employeeTable;
     IEmployeeController _employeeController;
 
-    public EmployeeManagementView(EmployeeEntity loggedEmployee, IEmployeeController employeeController) {
+    public EmployeeManagementView(
+    		EmployeeEntity loggedEmployee, 
+    		IEmployeeController employeeController
+    		) {
     	this._loggedEmployee = loggedEmployee;
     	this._employeeController = employeeController;
         

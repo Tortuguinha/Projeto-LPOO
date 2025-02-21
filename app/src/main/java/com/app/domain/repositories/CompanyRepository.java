@@ -7,13 +7,15 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.app.domain.entities.company.CompanyAddressEntity;
+import com.app.domain.entities.company.CompanyContactEntity;
 import com.app.domain.entities.company.CompanyEntity;
 import com.app.domain.repositories.interfaces.ICompanyRepository;
 import com.app.infrastructure.config.DatabaseConfig;
 
 public class CompanyRepository implements ICompanyRepository {
     
-    public void save(CompanyEntity company) {
+    public void save(CompanyEntity company, CompanyContactEntity contact, CompanyAddressEntity address) {
         String sqlCompany = """
                 INSERT INTO company (name, email, cnpj, status, createdAt)
                 VALUES (?, ?, ?, ?, ?)
