@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import com.app.infrastructure.database.ClientDatabaseInitializer;
 import com.app.infrastructure.database.CompanyDatabaseInitializer;
 import com.app.infrastructure.database.EmployeeDatabaseInitializer;
+import com.app.infrastructure.factories.ClientFactory;
 import com.app.infrastructure.factories.EmployeeFactory;
 import com.app.presentation.views.auth.LoginView;
 import com.app.presentation.views.employee.EmployeeRegisterView;
@@ -21,7 +22,9 @@ public class Main {
     	final EmployeeFactory employeeFactory = new EmployeeFactory();
     	
     	// Views
-    	final EmployeeRegisterView employeeRegisterView = new EmployeeRegisterView(employeeFactory.createEmployeeController(), null);
+    	final EmployeeRegisterView employeeRegisterView = new EmployeeRegisterView(
+    			employeeFactory.createEmployeeController(), 
+    			null);
     	
     	EventQueue.invokeLater(new Runnable() {    		
 			public void run() {
@@ -29,7 +32,10 @@ public class Main {
 					employeeDatabaseInit.execute();
 					clientDatabaseInit.execute();
 					companyDatabaseInit.execute();
-					LoginView frame = new LoginView(employeeFactory.createEmployeeController(), employeeRegisterView);
+					LoginView frame = new LoginView(
+							employeeFactory.createEmployeeController(),
+							employeeRegisterView
+							);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

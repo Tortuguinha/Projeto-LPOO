@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import com.app.domain.entities.employee.EmployeeEntity;
+import com.app.infrastructure.controllers.interfaces.IClientController;
 import com.app.infrastructure.controllers.interfaces.IEmployeeController;
 import com.app.presentation.views.DashboardView;
 import com.app.presentation.views.employee.EmployeeRegisterView;
@@ -27,7 +28,8 @@ public class LoginView extends JFrame {
 	
 	private final IEmployeeController _employeeController;
 
-	public LoginView(IEmployeeController employeeController, 
+	public LoginView(
+			IEmployeeController employeeController,
 			EmployeeRegisterView employeeRegisterView
 			) {
 		

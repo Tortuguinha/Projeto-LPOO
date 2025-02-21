@@ -7,13 +7,15 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.app.domain.entities.client.ClientAddressEntity;
+import com.app.domain.entities.client.ClientContactEntity;
 import com.app.domain.entities.client.ClientEntity;
 import com.app.domain.repositories.interfaces.IClientRepository;
 import com.app.infrastructure.config.DatabaseConfig;
 
 public class ClientRepository implements IClientRepository {
     
-    public void save(ClientEntity client) {
+    public void save(ClientEntity client, ClientContactEntity contact, ClientAddressEntity address) {
         String sqlClient = """
                 INSERT INTO client (name, email, cpf, status, createdAt)
                 VALUES (?, ?, ?, ?, ?)

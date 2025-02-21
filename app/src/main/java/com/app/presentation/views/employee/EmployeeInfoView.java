@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import com.app.domain.entities.employee.EmployeeEntity;
+import com.app.infrastructure.controllers.interfaces.IClientController;
 import com.app.infrastructure.controllers.interfaces.IEmployeeController;
 
 import java.awt.*;
@@ -44,7 +45,12 @@ public class EmployeeInfoView extends JFrame {
     private JButton updateEmployeeBtn;
     private JButton backScreenBtn;
 
-    public EmployeeInfoView(String employeeCPF, EmployeeEntity loggedEmployee, EmployeeEntity employee, IEmployeeController employeeController) {
+    public EmployeeInfoView(
+    		String employeeCPF, 
+    		EmployeeEntity loggedEmployee, 
+    		EmployeeEntity employee, 
+    		IEmployeeController employeeController
+    		) {
     	this._loggedEmployee = loggedEmployee;
     	this._employeeController = employeeController;
     	this._employeeCPF = employeeCPF;

@@ -21,6 +21,7 @@ import javax.swing.SwingConstants;
 import com.app.domain.entities.employee.EmployeeAddressEntity;
 import com.app.domain.entities.employee.EmployeeContactEntity;
 import com.app.domain.entities.employee.EmployeeEntity;
+import com.app.infrastructure.controllers.interfaces.IClientController;
 import com.app.infrastructure.controllers.interfaces.IEmployeeController;
 import com.app.presentation.views.DashboardView;
 import com.app.presentation.views.auth.LoginView;
@@ -67,7 +68,10 @@ public class EmployeeRegisterView extends JFrame {
 	private final IEmployeeController _employeeController;
 	private EmployeeEntity _loggedEmployee;
 
-	public EmployeeRegisterView(IEmployeeController employeeController,  EmployeeEntity loggedEmployee) {
+	
+	public EmployeeRegisterView(
+			IEmployeeController employeeController, 
+			EmployeeEntity loggedEmployee) {
 		this._loggedEmployee = loggedEmployee;
 		this._employeeController = employeeController;
 		this.components();

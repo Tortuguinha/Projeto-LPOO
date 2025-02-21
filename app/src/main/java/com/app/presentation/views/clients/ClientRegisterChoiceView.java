@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.app.domain.entities.employee.EmployeeEntity;
+import com.app.infrastructure.controllers.interfaces.IClientController;
 import com.app.infrastructure.controllers.interfaces.IEmployeeController;
 import com.app.presentation.views.DashboardView;
 import com.app.presentation.views.clients.client.ClientRegistrationView;
@@ -25,10 +26,14 @@ public class ClientRegisterChoiceView extends JFrame {
 	private JPanel contentPane;
 	private EmployeeEntity _employeeLogged;
 	private IEmployeeController _employeeController;
-
-	public ClientRegisterChoiceView(EmployeeEntity _employeeLogged, IEmployeeController employeeController) {
+	 
+	public ClientRegisterChoiceView(
+			EmployeeEntity _employeeLogged,
+			IEmployeeController employeeController
+			) {
 		this._employeeLogged = _employeeLogged;
 		this._employeeController = employeeController;
+
 		this.components();
 	}
 	
@@ -53,7 +58,7 @@ public class ClientRegisterChoiceView extends JFrame {
 		JButton legalPersonbtn = new JButton("Pessoa Jurídica (CNPJ)");
 		legalPersonbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CompanyRegistrationView companyRegisterView = new CompanyRegistrationView();
+				CompanyRegistrationView companyRegisterView = new CompanyRegistrationView(_employeeLogged);
 				companyRegisterView.setVisible(true);
 				dispose();
 			}
@@ -66,7 +71,7 @@ public class ClientRegisterChoiceView extends JFrame {
 		btnPessoaFsicacpf.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				ClientRegistrationView clientRegisterView = new ClientRegistrationView();
+				ClientRegistrationView clientRegisterView = new ClientRegistrationView(_employeeLogged);
 				clientRegisterView.setVisible(true);
 				dispose();
 				
